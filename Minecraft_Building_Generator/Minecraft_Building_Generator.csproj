@@ -49,9 +49,11 @@
     <Compile Include="Command_Generator\Generate_Commands.cs" />
     <Compile Include="Constants\Blocks.cs" />
     <Compile Include="Grid_Classes\Coordinate.cs" />
+    <Compile Include="Grid_Classes\GridContainer.cs" />
     <Compile Include="Grid_Classes\GridMap.cs" />
+    <Compile Include="Grid_Classes\Grid_Square.cs" />
     <Compile Include="Structures\Interfaces\IBuilding.cs" />
-    <Compile Include="Grid_Classes\Land.cs" />
+    <Compile Include="Generating Classes\Land.cs" />
     <Compile Include="mainform.cs">
       <SubType>Form</SubType>
     </Compile>

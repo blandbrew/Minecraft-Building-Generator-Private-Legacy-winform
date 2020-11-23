@@ -14,8 +14,13 @@ namespace Minecraft_Building_Generator
         [STAThread]
         static void Main()
         {
-            Land aLand = new Land();
-            aLand.Land_Divide();
+
+            //Starting coordinates:  143,63,-17
+            GridMap aMap = new GridMap(143, 63, -17, 4);
+
+            aMap.GenerateGrids();
+
+            
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

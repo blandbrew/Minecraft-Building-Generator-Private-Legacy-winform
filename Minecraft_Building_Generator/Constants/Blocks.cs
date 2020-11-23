@@ -8,6 +8,7 @@ namespace Minecraft_Building_Generator.Constants
 {
     public static class Blocks
     {
+
         public const string AIR = "Air";
         public const string ANY_STONE = "Any Stone";
         public const string STONE = "Stone";

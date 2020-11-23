@@ -16,9 +16,11 @@ namespace Minecraft_Building_Generator
         public const int DEMO_STARTING_Z = -17;
 
 
-        public const int LARGEST_SQUARE = 169;
-        public const int PARSED_GRID_SIZE = 13;
+        public const int GRID_CONTAINER_SIZE = 169;
+        public const int GRID_SQUARE_SIZE = 13;
         public const int MAX_FILL = 32768;
+        public const int GRID_CONTAINER_CENTER = 85;
+        public const int GRID_SQUARE_CENTER = 7;
         
     }
 }

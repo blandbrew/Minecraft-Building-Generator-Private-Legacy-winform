@@ -26,5 +26,11 @@ namespace Minecraft_Building_Generator.Grid_Classes
             return 1.0;
         }
 
+        public double Distance_Between_Coordinates(Coordinate b)
+        {
+            return 1.0;
+            
+        }
+
     }
 }
