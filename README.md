@@ -1,7 +1,7 @@
 # Minecraft Building Generator for Bedrock
 (This will work for Java but I am developing against Bedrock)
 
-**CURRENT STATUS: Not Useable**
+**CURRENT STATUS: Grid Layout Exportable and Grid Map Complete, no UI or any buildings capable**
 
 This is basic tool the uses Minecraft Functions to create Randomized Buildings, towsn,Cities, etc.
 
@@ -24,6 +24,12 @@ A function file can contain up to 10,000 individual commands. Leveraging this li
 
 Using this grid setup, the system generates a start and end coordinates for both a container and all of its containing squares.
 Since we have all of this information now we can use this data to populate buildings on the squares.
+
+![Grid Layout](/CityGenerator%20-%20Grid%20Layout.png?raw=true "Minecraft Generator Grid Layout")
+
+The above screenshot is the generation of four 169x169 Grid Containers, and each container has 169 13x13 grid squares.
+This grid is drawn in 4 function commands.  In the application however, every single point within this gird can be procedurally referenced allowing for any command to be executed over it. 
+
 
 ### Examples
 (This is just some ideas nothing is concrete at this time)
