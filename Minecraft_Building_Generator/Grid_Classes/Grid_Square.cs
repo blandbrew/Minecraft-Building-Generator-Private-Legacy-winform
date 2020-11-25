@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Minecraft_Building_Generator.Grid_Classes
 {
-    public class Grid_Square
+    public class Grid_Square :IGrid_Square
     {
         public Coordinate startCoordinate;
         public Coordinate endCoordinate;
@@ -25,7 +25,19 @@ namespace Minecraft_Building_Generator.Grid_Classes
         public Grid_Square(Coordinate startPoint)
         {
             startCoordinate = startPoint;
+            adjacent_Squares = new List<Grid_Square>();
         }
 
+        public void Add_Adjacent_Square(Grid_Square adjacentSquare)
+        {
+            adjacent_Squares.Add(adjacentSquare);
+            
+        }
+
+        public List<Grid_Square> GetAll_Adjacent_Squares()
+        {
+            return adjacent_Squares;
+            throw new NotImplementedException();
+        }
     }
 }

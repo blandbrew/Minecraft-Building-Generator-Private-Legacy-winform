@@ -52,6 +52,9 @@
     <Compile Include="Grid_Classes\GridContainer.cs" />
     <Compile Include="Grid_Classes\GridMap.cs" />
     <Compile Include="Grid_Classes\Grid_Square.cs" />
+    <Compile Include="Grid_Classes\Interfaces\IGrid_Container.cs" />
+    <Compile Include="Grid_Classes\Interfaces\IGrid_Square.cs" />
+    <Compile Include="Structures\Generic_Buildings\GenericBuilding.cs" />
     <Compile Include="Structures\Interfaces\IBuilding.cs" />
     <Compile Include="Generating Classes\Land.cs" />
     <Compile Include="mainform.cs">

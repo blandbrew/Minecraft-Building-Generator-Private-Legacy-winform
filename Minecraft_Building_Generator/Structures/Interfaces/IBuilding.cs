@@ -1,4 +1,9 @@
-﻿using System;
+﻿/**
+ * This interfaces defines a building and the methods that need to execute for each building
+ */
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +13,13 @@ namespace Minecraft_Building_Generator
 {
     interface IBuilding
     {
-        void Building_Walls();
-        void Building_Floor();
-       
+        void Building_OutsideWalls();
+        void Building_Floor(int numberOfFloors);
+        void Building_Lighting();
+        void Building_Door(string direction);
+        void Building_Ladder();
+
+
 
     }
 }

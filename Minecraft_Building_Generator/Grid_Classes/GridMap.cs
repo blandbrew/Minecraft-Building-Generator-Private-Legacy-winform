@@ -89,10 +89,14 @@ namespace Minecraft_Building_Generator
         {
             Generate_Grid_Containers(startCoordinate, number_of_Grid_Containers);
 
-
             Generate_Grid_Squares(this.PrimaryGridMap);
 
-            int aaaa = 1;
+            Generate_Adjacent_Containers(this.PrimaryGridMap);
+
+            Generate_Adjacent_Grid_Squares(this.PrimaryGridMap);
+
+            int aaa = 0;
+
         }
 
 
@@ -177,13 +181,12 @@ namespace Minecraft_Building_Generator
 
 
                         PrimaryGridMap[i, k] = aGridContainer;
-                        _tempX += aGridContainer.startCoordinate.x + Shared_Constants.GRID_CONTAINER_SIZE + 1; //adds one on to mark the start point of next grid
-                   
+                        _tempX = aGridContainer.startCoordinate.x + Shared_Constants.GRID_CONTAINER_SIZE; //adds one on to mark the start point of next grid   
 
                 }
 
-                    _tempX = PrimaryGridMap[i, 0].startCoordinate.x + 1; //Resets the X coord so process can iterate across again. (like a typewriter)
-                    _tempZ += Shared_Constants.GRID_CONTAINER_SIZE + 1; //adds 1 to mark the start point of next container
+                    _tempX = PrimaryGridMap[i, 0].startCoordinate.x; //Resets the X coord so process can iterate across again. (like a typewriter)
+                    _tempZ += Shared_Constants.GRID_CONTAINER_SIZE; //adds 1 to mark the start point of next container
 
                 }
 
@@ -204,12 +207,6 @@ namespace Minecraft_Building_Generator
 
         private void Generate_Grid_Squares(Grid_Container[,] PrimaryGridMap)
         {
-
-            //Coordinate startPoint = PrimaryGridMap[0, 0].startCoordinate;
-            //int _tempX = startPoint.x;
-            //int _tempY = startPoint.y;
-            //int _tempZ = startPoint.z;
-       
 
             for (int i = 0; i < number_of_Grid_Containers / 2; i++)
             {
@@ -246,12 +243,12 @@ namespace Minecraft_Building_Generator
 
                             aGridSquareMap[m, n] = aSquare;
 
-                            _tempX = aSquare.startCoordinate.x + Shared_Constants.GRID_SQUARE_SIZE + 1;
+                            _tempX = aSquare.startCoordinate.x + Shared_Constants.GRID_SQUARE_SIZE;
 
                         }
 
-                        _tempX = aGridSquareMap[m, 0].startCoordinate.x + 1; //Resets the X coord so process can iterate across again. (like a typewriter)
-                        _tempZ += Shared_Constants.GRID_SQUARE_SIZE + 1; //adds 1 to mark the start point of next container
+                        _tempX = aGridSquareMap[m, 0].startCoordinate.x; //Resets the X coord so process can iterate across again. (like a typewriter)
+                        _tempZ += Shared_Constants.GRID_SQUARE_SIZE; //adds 1 to mark the start point of next container
 
                     }
 
@@ -261,56 +258,107 @@ namespace Minecraft_Building_Generator
             }
         }
 
-        //private void Map_Out_GridSquare(Grid_Container aContainer)
-        //{
-        //    Grid_Square[,] aGridSquareMap = new Grid_Square[Shared_Constants.GRID_SQUARE_SIZE - 1, Shared_Constants.GRID_SQUARE_SIZE - 1];
 
-        //    Coordinate startPoint = aContainer.startCoordinate;
+        public void Generate_Adjacent_Containers(Grid_Container[,] PrimaryGridMap)
+        {
+            
+            for (int i = 0; i < number_of_Grid_Containers / 2; i++)
+            {
+                for (int k = 0; k < number_of_Grid_Containers / 2; k++)
+                {
+                    Grid_Container aContainer = PrimaryGridMap[i, k];
 
-        //    Grid_Square aSquare = new Grid_Square()
 
+                    //This section is to test for adjacency and then associate the adjacent unit.
+                    //Minecraft only has to test 4 directions since we are not considering diagnal adjacency
+                    try
+                    {
 
-        //}
+                        //before
+                        if (k - 1 >= 0)
+                        {
+                            aContainer.Add_Adjacent_Container(PrimaryGridMap[i, k - 1]);
+                        }
+                        //next
+                        if (k + 1 < number_of_Grid_Containers / 2)
+                        {
+                            aContainer.Add_Adjacent_Container(PrimaryGridMap[i, k + 1]);
+                        }
+                        //above
+                        if ((i + 1) > (number_of_Grid_Containers / 2))
+                        {
+                            aContainer.Add_Adjacent_Container(PrimaryGridMap[i + 1, k]);
+                        }
+                        //below
+                        if ((i - 1) >= 0)
+                        {
+                            aContainer.Add_Adjacent_Container(PrimaryGridMap[i - 1, k]);
+                        }
 
-        public void Grid_Divide()
+                    }
+                    catch (IndexOutOfRangeException err)
+                    {
+                        Console.WriteLine(err);
+                    }
+                }
+            }
+
+        }
+
+        public void Generate_Adjacent_Grid_Squares(Grid_Container[,] PrimaryGridMap)
         {
 
-            //creates a grid map able to hold equal squares of 13x13
-            //transformation_plot = new GridMap[13, 13];
-
-            //EACH Gridmap chunk needs to store a reference to XYZ for start corner.
-            //The individual blocks in the chunk can then be caluclated because the size of the chunk is 13.
-            //transformation_plot[0, 0] = new GridMap(Shared_Constants.DEMO_STARTING_X, Shared_Constants.DEMO_STARTING_Y, Shared_Constants.DEMO_STARTING_Z, Shared_Constants.GRID_SIZE);
-
-            int _tempX;
-            int _tempY;
-            int _tempZ;
-
-            //GridMap initialize_grid = new GridMap(Shared_Constants.DEMO_STARTING_X, Shared_Constants.DEMO_STARTING_Y, Shared_Constants.DEMO_STARTING_Z, Shared_Constants.GRID_SIZE);
-
-            //_tempX = initialize_grid.startX;
-            //_tempY = initialize_grid.startY;
-            // _tempZ = initialize_grid.startZ;
-
-            //generate the grid squares into 169  13x13 grid squares
-            for (int i = 0; i < 13; i++)
+            for (int i = 0; i < number_of_Grid_Containers / 2; i++)
             {
-                for (int k = 0; k < 13; k++)
+                for (int k = 0; k < number_of_Grid_Containers / 2; k++)
                 {
-                    //transformation_plot[i, k] = new GridMap(
-                    //    _tempX,
-                    //    _tempY,
-                    //    _tempZ,
-                    //    Shared_Constants.GRID_SIZE);
+                    Grid_Container aContainer = PrimaryGridMap[i, k];
+                    Grid_Square[,] aGridSquareMap = aContainer.gridSquareMap;
 
-                    //add 13 on to the next grid
-                    //_tempX += 14;
+                    for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
+                    {
+                        for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
+                        {
 
+                            Grid_Square aGridSquare = aGridSquareMap[m, n];
+                            try
+                            {
+                                //before
+                                if (n - 1 >= 0)
+                                {
+                                    aGridSquare.Add_Adjacent_Square(aGridSquareMap[m, n - 1]);
+                                }
+                                //next
+                                if (n + 1 < Shared_Constants.GRID_SQUARE_SIZE)
+                                {
+                                    aGridSquare.Add_Adjacent_Square(aGridSquareMap[i, n + 1]);
+                                }
+                                //above
+                                if ((m + 1) > (Shared_Constants.GRID_SQUARE_SIZE))
+                                {
+                                    aGridSquare.Add_Adjacent_Square(aGridSquareMap[i + 1, n]);
+                                }
+                                //below
+                                if ((m - 1) >= 0)
+                                {
+                                    aGridSquare.Add_Adjacent_Square(aGridSquareMap[i - 1, n]);
+                                }
+
+                            }
+                            catch (IndexOutOfRangeException err)
+                            {
+                                Console.WriteLine(err);
+                            }
+
+                        }
+
+                    }
 
                 }
-                //_tempX = initialize_grid.startX;
-                //_tempZ += 14;
             }
         }
+
+
+        
     }
 }
