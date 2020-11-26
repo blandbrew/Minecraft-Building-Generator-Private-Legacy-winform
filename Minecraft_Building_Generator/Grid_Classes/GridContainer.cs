@@ -24,6 +24,7 @@ namespace Minecraft_Building_Generator.Grid_Classes
         public int padding;
         public int offset;
         public int margin;
+        public bool isValid;
 
         public Grid_Square[,] gridSquareMap;
         public List<Grid_Container> adjacent_Container_List;
@@ -36,7 +37,7 @@ namespace Minecraft_Building_Generator.Grid_Classes
 
         public void Add_Adjacent_Container(Grid_Container adjacentContainer)
         {
-            adjacent_Container_List.Add(adjacentContainer);
+            this.adjacent_Container_List.Add(adjacentContainer);
         }
 
         public List<Grid_Container> GetAll_Adjacent_Containers()

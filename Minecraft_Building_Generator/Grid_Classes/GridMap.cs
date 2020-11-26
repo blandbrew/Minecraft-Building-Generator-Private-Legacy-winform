@@ -85,6 +85,7 @@ namespace Minecraft_Building_Generator
 
         }
 
+ 
         public void GenerateGrids()
         {
             Generate_Grid_Containers(startCoordinate, number_of_Grid_Containers);
@@ -179,6 +180,7 @@ namespace Minecraft_Building_Generator
                                 aGridContainer.startCoordinate.y + Shared_Constants.GRID_CONTAINER_CENTER
                             );
 
+                        aGridContainer.isValid = true;
 
                         PrimaryGridMap[i, k] = aGridContainer;
                         _tempX = aGridContainer.startCoordinate.x + Shared_Constants.GRID_CONTAINER_SIZE; //adds one on to mark the start point of next grid   
@@ -241,6 +243,7 @@ namespace Minecraft_Building_Generator
                                     aSquare.startCoordinate.z + Shared_Constants.GRID_SQUARE_CENTER
                                 );
 
+                            aSquare.isValid = true;
                             aGridSquareMap[m, n] = aSquare;
 
                             _tempX = aSquare.startCoordinate.x + Shared_Constants.GRID_SQUARE_SIZE;
@@ -275,22 +278,23 @@ namespace Minecraft_Building_Generator
                     {
 
                         //before
-                        if (k - 1 >= 0)
+                        if (k - 1 >= 0 && PrimaryGridMap[i, k - 1].isValid)
                         {
+
                             aContainer.Add_Adjacent_Container(PrimaryGridMap[i, k - 1]);
                         }
                         //next
-                        if (k + 1 < number_of_Grid_Containers / 2)
+                        if ((k + 1 < number_of_Grid_Containers / 2) && PrimaryGridMap[i, k + 1].isValid)
                         {
                             aContainer.Add_Adjacent_Container(PrimaryGridMap[i, k + 1]);
                         }
                         //above
-                        if ((i + 1) > (number_of_Grid_Containers / 2))
+                        if ((i + 1 < number_of_Grid_Containers / 2) && PrimaryGridMap[i + 1, k].isValid)
                         {
                             aContainer.Add_Adjacent_Container(PrimaryGridMap[i + 1, k]);
                         }
                         //below
-                        if ((i - 1) >= 0)
+                        if ((i - 1 >= 0) && PrimaryGridMap[i - 1, k].isValid)
                         {
                             aContainer.Add_Adjacent_Container(PrimaryGridMap[i - 1, k]);
                         }
@@ -324,22 +328,22 @@ namespace Minecraft_Building_Generator
                             try
                             {
                                 //before
-                                if (n - 1 >= 0)
+                                if ((n - 1 >= 0) && aGridSquareMap[m, n - 1].isValid)
                                 {
                                     aGridSquare.Add_Adjacent_Square(aGridSquareMap[m, n - 1]);
                                 }
                                 //next
-                                if (n + 1 < Shared_Constants.GRID_SQUARE_SIZE)
+                                if ((n + 1 < Shared_Constants.GRID_SQUARE_SIZE) && aGridSquareMap[m, n + 1].isValid)
                                 {
-                                    aGridSquare.Add_Adjacent_Square(aGridSquareMap[i, n + 1]);
+                                    aGridSquare.Add_Adjacent_Square(aGridSquareMap[m, n + 1]);
                                 }
                                 //above
-                                if ((m + 1) > (Shared_Constants.GRID_SQUARE_SIZE))
+                                if ((m + 1 < Shared_Constants.GRID_SQUARE_SIZE) && aGridSquareMap[m + 1, n].isValid)
                                 {
-                                    aGridSquare.Add_Adjacent_Square(aGridSquareMap[i + 1, n]);
+                                    aGridSquare.Add_Adjacent_Square(aGridSquareMap[m + 1, n]);
                                 }
                                 //below
-                                if ((m - 1) >= 0)
+                                if ((m - 1 >= 0) && aGridSquareMap[m - 1, n].isValid)
                                 {
                                     aGridSquare.Add_Adjacent_Square(aGridSquareMap[i - 1, n]);
                                 }

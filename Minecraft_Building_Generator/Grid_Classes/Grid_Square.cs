@@ -19,6 +19,7 @@ namespace Minecraft_Building_Generator.Grid_Classes
         public int padding;
         public int offset;
         public int margin;
+        public bool isValid;
 
         public List<Grid_Square> adjacent_Squares;
 
@@ -30,7 +31,7 @@ namespace Minecraft_Building_Generator.Grid_Classes
 
         public void Add_Adjacent_Square(Grid_Square adjacentSquare)
         {
-            adjacent_Squares.Add(adjacentSquare);
+            this.adjacent_Squares.Add(adjacentSquare);
             
         }
 

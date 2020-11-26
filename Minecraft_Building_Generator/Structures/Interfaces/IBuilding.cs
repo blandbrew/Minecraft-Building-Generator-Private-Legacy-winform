@@ -18,6 +18,7 @@ namespace Minecraft_Building_Generator
         void Building_Lighting();
         void Building_Door(string direction);
         void Building_Ladder();
+        void Building_Windows();
 
 
 

@@ -9,6 +9,8 @@ namespace Minecraft_Building_Generator.Structures
     public class GenericBuilding : IBuilding
     {
 
+
+
         public GenericBuilding()
         {
 
@@ -38,6 +40,11 @@ namespace Minecraft_Building_Generator.Structures
         }
 
         public void Building_Ladder()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Building_Windows()
         {
             throw new NotImplementedException();
         }
