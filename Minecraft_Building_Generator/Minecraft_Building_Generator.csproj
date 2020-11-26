@@ -92,8 +92,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="_images\wiki\" />
+    <Content Include="images\wiki\AdjacentGrids.png" />
+    <Content Include="images\wiki\BuildingSpace.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
