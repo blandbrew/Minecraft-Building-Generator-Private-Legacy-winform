@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Minecraft_Building_Generator.Structures
 {
-    public class GenericBuilding : IBuilding
+    public class GenericBuilding : Building, IBuilding
     {
 
-
-
+       
         public GenericBuilding()
         {
-
+           
         }
 
 

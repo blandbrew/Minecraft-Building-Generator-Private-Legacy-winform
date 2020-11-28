@@ -13,8 +13,8 @@ namespace Minecraft_Building_Generator
 {
     interface IBuilding
     {
-        void Building_OutsideWalls();
-        void Building_Floor(int numberOfFloors);
+        void Building_OutsideWalls(); //fill hollow
+        void Building_Floor(int numberOfFloors); //startpoint / endpoint
         void Building_Lighting();
         void Building_Door(string direction);
         void Building_Ladder();

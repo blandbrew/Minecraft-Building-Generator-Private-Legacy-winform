@@ -33,8 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,20 +50,23 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command_Generator\Generate_Commands.cs" />
+    <Compile Include="Constants\Block.cs" />
     <Compile Include="Constants\Blocks.cs" />
     <Compile Include="Grid_Classes\Coordinate.cs" />
     <Compile Include="Grid_Classes\GridContainer.cs" />
     <Compile Include="Grid_Classes\GridMap.cs" />
+    <Compile Include="Grid_Classes\Grid_Properties.cs" />
     <Compile Include="Grid_Classes\Grid_Square.cs" />
     <Compile Include="Grid_Classes\Interfaces\IGrid_Container.cs" />
     <Compile Include="Grid_Classes\Interfaces\IGrid_Square.cs" />
+    <Compile Include="Structures\Building.cs" />
     <Compile Include="Structures\Build_Manager.cs" />
     <Compile Include="Structures\Generic_Buildings\GenericBuilding.cs" />
     <Compile Include="Structures\Interfaces\IBuilding.cs" />
-    <Compile Include="Generating Classes\Land.cs" />
     <Compile Include="mainform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +76,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Constants\Shared_Constants.cs" />
+    <Compile Include="Structures\Interfaces\IBuildingUnderground.cs" />
     <EmbeddedResource Include="mainform.resx">
       <DependentUpon>mainform.cs</DependentUpon>
     </EmbeddedResource>
@@ -79,6 +89,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Constants\blockdata.json" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,9 +105,5 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="images\wiki\AdjacentGrids.png" />
-    <Content Include="images\wiki\BuildingSpace.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

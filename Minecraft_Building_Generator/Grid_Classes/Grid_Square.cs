@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Minecraft_Building_Generator.Grid_Classes
 {
-    public class Grid_Square :IGrid_Square
+    public class Grid_Square : Grid_Properties, IGrid_Square
     {
-        public Coordinate startCoordinate;
-        public Coordinate endCoordinate;
+       // public Coordinate startCoordinate;
+        //public Coordinate endCoordinate;
         public Coordinate centerblock;
 
         public int padding;
