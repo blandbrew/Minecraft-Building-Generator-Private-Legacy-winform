@@ -49,7 +49,7 @@ namespace Minecraft_Building_Generator
 
         public Coordinate startCoordinate;
         public Coordinate endCoordinate;
-        public int number_of_Grid_Containers; //size of the grid in 169x169 block chunks
+        public static int number_of_Grid_Containers; //size of the grid in 169x169 block chunks
 
 
         //This 2D array stores all the Grid Containers
@@ -76,11 +76,11 @@ namespace Minecraft_Building_Generator
 
             if (number_of_Grid_Containers == 1 || number_of_Grid_Containers % 2 == 0)
             {
-                this.number_of_Grid_Containers = number_of_Grid_Containers;
+                GridMap.number_of_Grid_Containers = number_of_Grid_Containers;
             }
             else
             {
-                this.number_of_Grid_Containers = 1;
+                GridMap.number_of_Grid_Containers = 1;
             }
 
         }

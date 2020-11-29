@@ -12,7 +12,7 @@ namespace Minecraft_Building_Generator.Command_Generator
     {
 
         //List of commands to be exported to the mcfunction file
-        static List<string> generatedFunctionLines = new List<string>();
+        private static List<string> generatedFunctionLines = new List<string>();
 
 
 
@@ -73,6 +73,9 @@ namespace Minecraft_Building_Generator.Command_Generator
                             " stone");
                     }
                 }
+
+                foreach (string line in generatedFunctionLines)
+                    outputFile.WriteLine(line);
             }
         }
 

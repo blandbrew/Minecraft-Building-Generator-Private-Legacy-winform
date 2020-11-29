@@ -63,10 +63,10 @@
     <Compile Include="Grid_Classes\Grid_Square.cs" />
     <Compile Include="Grid_Classes\Interfaces\IGrid_Container.cs" />
     <Compile Include="Grid_Classes\Interfaces\IGrid_Square.cs" />
-    <Compile Include="Structures\Building.cs" />
+    <Compile Include="Structures\Buildings\abstract_Building.cs" />
     <Compile Include="Structures\Build_Manager.cs" />
-    <Compile Include="Structures\Generic_Buildings\GenericBuilding.cs" />
-    <Compile Include="Structures\Interfaces\IBuilding.cs" />
+    <Compile Include="Structures\Buildings\GenericBuilding.cs" />
+    <Compile Include="Structures\Buildings\Interfaces\IBuilding.cs" />
     <Compile Include="mainform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,7 +76,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Constants\Shared_Constants.cs" />
-    <Compile Include="Structures\Interfaces\IBuildingUnderground.cs" />
+    <Compile Include="Structures\Buildings\Interfaces\IBuildingUnderground.cs" />
     <EmbeddedResource Include="mainform.resx">
       <DependentUpon>mainform.cs</DependentUpon>
     </EmbeddedResource>
