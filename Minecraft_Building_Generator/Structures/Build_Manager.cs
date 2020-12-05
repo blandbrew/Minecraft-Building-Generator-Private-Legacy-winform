@@ -1,4 +1,8 @@
-﻿using Minecraft_Building_Generator.Command_Generator;
+﻿/**
+  * The build manager will be responsible for handling the buliding 
+  */
+
+using Minecraft_Building_Generator.Command_Generator;
 using Minecraft_Building_Generator.Grid_Classes;
 using System;
 using System.Collections.Generic;
@@ -10,12 +14,14 @@ namespace Minecraft_Building_Generator.Structures
 {
     public class Build_Manager
     {
-        /**
-         * The build manager will be responsible for handling the buliding 
-         */
+
+        public int DensityFactor { get; set; } //How dense shall the generated city be?
 
         private Grid_Container[,] FullGridMap { get; set; }
         private int TotalNumberContainers;
+
+        
+
 
         public Build_Manager(Grid_Container[,] map)
         {
@@ -24,12 +30,14 @@ namespace Minecraft_Building_Generator.Structures
 
 
         //Loops through the grid container/squares and runs build commands
+        //This is where types of buildings will need to be identified and 
         public void Process_Containers()
         {
+            Random rand = new Random();
             //loop through containers
-            for (int i = 0; i < GridMap.number_of_Grid_Containers / 2; i++)
+            for (int i = 0; i < Math.Sqrt(GridMap.number_of_Grid_Containers); i++)
             {
-                for (int j = 0; j < GridMap.number_of_Grid_Containers / 2; j++)
+                for (int j = 0; j < Math.Sqrt(GridMap.number_of_Grid_Containers); j++)
                 {
                     Grid_Container aContainer = FullGridMap[i, j];
                     Grid_Square[,] squareMap = aContainer.gridSquareMap;
@@ -40,7 +48,10 @@ namespace Minecraft_Building_Generator.Structures
                         {
                             Grid_Square aSquare = squareMap[m, n];
 
-                            GenericBuilding gb = new GenericBuilding(150, BuildingClass.Commercial);
+                            
+                            int randomHeight = rand.Next(20, 40);
+                            //Console.WriteLine(randomHeight);
+                            GenericBuilding gb = new GenericBuilding(randomHeight, BuildingClass.Commercial);
 
                             gb.Building_OutsideWalls(aSquare.startCoordinate);
                             gb.Building_Floor(aSquare.startCoordinate);

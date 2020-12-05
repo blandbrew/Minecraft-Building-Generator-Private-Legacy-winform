@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace Minecraft_Building_Generator.Structures
 {
 
-    public enum BuildingClass { Residential, Commercial, Industrial, Other, None}
-    public enum BuildingMaterial { Glass, Wooden, Rock, Concrete, Jewel, Other, None}
+    //public enum BuildingClass { Residential, Commercial, Industrial, Other, None}
+    //public enum BuildingMaterial { Glass, Wooden, Rock, Concrete, Jewel, Other, None}
 
     public abstract class abstract_Building
     {

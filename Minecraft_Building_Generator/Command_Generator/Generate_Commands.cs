@@ -24,61 +24,159 @@ namespace Minecraft_Building_Generator.Command_Generator
         public static int Add_Command(string command)
         {
             generatedFunctionLines.Add(command);
-
             return generatedFunctionLines.Count;
         }
 
 
 
-
-
-        private void ExportFunctionLines()
+        public string ExportCommandstoFiles(Grid_Container[,] map)
         {
-            // Set a variable to the Documents path.
-            string docPath =
-              Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-            // Write the string array to a new file named "WriteLines.txt".
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "cityGenerator.mcfunction")))
-            {
-                foreach (string line in generatedFunctionLines)
-                    outputFile.WriteLine(line);
-            }
-        }
+            //try
+            //{
+                List<string> generatedGridContainer_Commands = new List<string>();
+                List<string> rangeOfCommands;
 
-        public void ShortTest(Grid_Container[,] map)
-        {
-            // Set a variable to the Documents path.
-            string docPath =
-              Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string docPath = Environment.ExpandEnvironmentVariables(@"%LOCALAPPDATA%\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\development_behavior_packs");
+                //% LOCALAPPDATA % C:\Users\Username\AppData\Local
+                //AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\development_behavior_packs
 
-            // Write the string array to a new file named "WriteLines.txt".
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "cityGenerator.mcfunction")))
-            {
+                int numberOfFilesToGenerate = DivideCommands();
+                int rangeStart = 0;
+                Console.WriteLine("number of files to generate: " + numberOfFilesToGenerate);
+                //int rangeEnd = Shared_Constants.MAX_NUMBER_OF_COMMANDS;
 
-                for (int i = 0; i < map.Length / 2; i++)
+                //Sets the Grid Container commands to this container
+                generatedGridContainer_Commands = GenerateGrid_FillCommands(generatedGridContainer_Commands, map);
+
+                StreamWriter[] outputFile = new StreamWriter[numberOfFilesToGenerate];
+
+                for (int i = 0; i < numberOfFilesToGenerate; i++)
                 {
-                    for (int j = 0; j < map.Length / 2; j++)
+                    string nameOfFile = $"run{i + 1}.mcfunction";
+
+                    //outputFile[i] = new StreamWriter(Path.Combine(docPath, nameOfFile));
+                    outputFile[i] = new StreamWriter(Path.Combine(docPath, nameOfFile));
+
+
+                    if (i == 0)
                     {
-
-                        Grid_Container aContainer = map[i, j];
-
-                        outputFile.WriteLine(
-                            "fill " + aContainer.startCoordinate.x + 
-                            " " + aContainer.startCoordinate.y + 
-                            " " + aContainer.startCoordinate.z + 
-                            " " + aContainer.endCoordinate.x + 
-                            " " + aContainer.endCoordinate.y + 
-                            " " + aContainer.endCoordinate.z + 
-                            " stone");
+                        foreach (string line in generatedGridContainer_Commands)
+                            outputFile[i].WriteLine(line);
                     }
-                }
+                    rangeOfCommands = RangeOfCommandsToPrint(rangeStart, numberOfFilesToGenerate);
 
-                foreach (string line in generatedFunctionLines)
-                    outputFile.WriteLine(line);
-            }
+                    foreach (string line in rangeOfCommands)
+                        outputFile[i].WriteLine(line);
+
+
+                    Console.WriteLine("Output Closing");
+                    Console.WriteLine("VALUE OF I: " + i);
+                    outputFile[i].Close();
+
+                    rangeStart += rangeOfCommands.Count;
+                }
+            //} catch(Exception anError)
+            //{
+            //    Console.WriteLine(anError.Message);
+            //    return anError.Message;
+            //}
+
+            generatedFunctionLines.Clear(); //clears the list of functions
+            return "Export Completed";
+
         }
 
+        private List<string> RangeOfCommandsToPrint(int start, int splitValue)
+        {
+                Console.WriteLine(start);
+
+            int chunk = generatedFunctionLines.Count / splitValue;
+
+            List<string> commands = new List<string>();
+            if(generatedFunctionLines.Count < Shared_Constants.MAX_NUMBER_OF_COMMANDS)
+            {
+                return generatedFunctionLines;
+            }
+
+            if(start + chunk > generatedFunctionLines.Count)
+            {
+                Console.WriteLine("Chunk: " + chunk);
+                Console.WriteLine("start: " + start);
+                Console.WriteLine("total: " + generatedFunctionLines.Count);
+                int remaining = (start + chunk) - generatedFunctionLines.Count;
+                Console.WriteLine("remaining: " + remaining);
+                return commands = generatedFunctionLines.GetRange(start, remaining);
+            } else
+            {
+                return commands = generatedFunctionLines.GetRange(start, chunk);
+            }
+
+            
+        
+        }
+
+
+        private int DivideCommands()
+        {
+            int number_of_commands = generatedFunctionLines.Count;
+            Console.WriteLine("Number of commands: " + number_of_commands);
+            double chunks_of_commands = 1;
+
+            if(number_of_commands > Shared_Constants.MAX_NUMBER_OF_COMMANDS)
+            {
+                chunks_of_commands = (double) number_of_commands / (double)Shared_Constants.MAX_NUMBER_OF_COMMANDS;
+                Console.WriteLine(chunks_of_commands);
+                chunks_of_commands = Math.Ceiling(chunks_of_commands);
+                
+            } 
+
+            return (int)chunks_of_commands;
+        }
+
+        private List<string> GenerateGrid_FillCommands(List<string> generatedGridContainer_Commands, Grid_Container[,] map)
+        {
+            
+            for (int i = 0; i < Math.Sqrt(map.Length); i++)
+            {
+                for (int j = 0; j < Math.Sqrt(map.Length); j++)
+                {
+                    
+                    Grid_Container aContainer = map[i, j];
+                    Console.WriteLine("Acontainer.length: " + map.Length);
+                    Console.WriteLine("aContainer start coord " + aContainer.startCoordinate.x);
+                    generatedGridContainer_Commands.Add(
+                        "fill " + aContainer.startCoordinate.x +
+                        " " + aContainer.startCoordinate.y +
+                        " " + aContainer.startCoordinate.z +
+                        " " + aContainer.endCoordinate.x +
+                        " " + aContainer.endCoordinate.y +
+                        " " + aContainer.endCoordinate.z +
+                        " stone");
+                }
+            }
+
+            return generatedGridContainer_Commands;
+        }
+
+       
+
+
+
+
+        //private void ExportFunctionLines()
+        //{
+        //    // Set a variable to the Documents path.
+        //    string docPath =
+        //      Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+        //    // Write the string array to a new file named "WriteLines.txt".
+        //    using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "cityGenerator.mcfunction")))
+        //    {
+        //        foreach (string line in generatedFunctionLines)
+        //            outputFile.WriteLine(line);
+        //    }
+        //}
 
         /**
          * This is a functional test to demonstrate that the squares are all individually generated procedurally and they can such be recalled.

@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 namespace Minecraft_Building_Generator
 {
 
-    //143,63,-17
+    public enum BuildingClass { Residential, Commercial, Industrial, Other, None }
+    public enum BuildingMaterial { Glass, Wooden, Rock, Concrete, Jewel, Other, None }
+
+    
+
     public static class Shared_Constants
     {
         
@@ -21,6 +25,8 @@ namespace Minecraft_Building_Generator
         public const int MAX_FILL = 32768;
         public const int GRID_CONTAINER_CENTER = 85;
         public const int GRID_SQUARE_CENTER = 7;
+
+        public const int MAX_NUMBER_OF_COMMANDS = 9950;
         
     }
 }

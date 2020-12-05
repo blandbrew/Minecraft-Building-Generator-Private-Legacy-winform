@@ -8,14 +8,62 @@ namespace Minecraft_Building_Generator.Grid_Classes
 {
     public abstract class Grid_Properties
     {
-        public Coordinate startCoordinate;
-        public Coordinate endCoordinate;
-        public Coordinate centerblock;
 
-        public int padding;
-        public int offset;
-        public int margin;
-        public bool isValid;
+        /*Variables*/
+        protected Coordinate StartCoordinate;
+        public Coordinate startCoordinate
+        {
+            get { return StartCoordinate; }   
+            set { StartCoordinate = value; }                               
+        }
+
+
+        protected Coordinate EndCoordinate;
+        public Coordinate endCoordinate   
+        {
+            get { return EndCoordinate; }   
+            set { EndCoordinate = value; }                              
+        }
+
+
+        protected Coordinate Centerblock;
+        public Coordinate centerblock  
+        {
+            get { return Centerblock; }   
+            set { Centerblock = value; }                               
+        }
+
+
+        protected int Padding;
+        public int padding
+        {
+            get { return Padding; }
+            set { Padding = value; }
+        }
+
+
+        protected int Offset;
+        public int offset
+        {
+            get { return Offset; }
+            set { Offset = value; }
+        }
+
+        protected int Margin;
+        public int margin
+        {
+            get { return Margin; }
+            set { Margin = value; }
+        }
+
+        protected bool IsValid;
+        public bool isValid
+        {
+            get { return IsValid; }
+            set { IsValid = value; }                               
+        }
+
+        
 
     }
 }

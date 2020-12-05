@@ -12,23 +12,31 @@ namespace Minecraft_Building_Generator.Grid_Classes
 {
     public class Grid_Square : Grid_Properties, IGrid_Square
     {
-       // public Coordinate startCoordinate;
-        //public Coordinate endCoordinate;
-        public Coordinate centerblock;
 
-        public int padding;
-        public int offset;
-        public int margin;
-        public bool isValid;
+        /*Variables*/
+        /// <summary>
+        /// Grid Squares that are adjacent, maximum number of 4.  Excludes Diagnal Squares
+        /// </summary>
+        public List<Grid_Square> adjacent_Squares { get; set; }
 
-        public List<Grid_Square> adjacent_Squares;
+        /// <summary>
+        /// Squares that have been marked for adjacent building.
+        /// </summary>
+        public List<Grid_Square> Joined_Squares { get; set; }
 
+        
+
+
+        /*Constructor*/
         public Grid_Square(Coordinate startPoint)
         {
             startCoordinate = startPoint;
             adjacent_Squares = new List<Grid_Square>();
         }
 
+
+
+        /*Methods*/
         public void Add_Adjacent_Square(Grid_Square adjacentSquare)
         {
             this.adjacent_Squares.Add(adjacentSquare);

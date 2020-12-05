@@ -77,6 +77,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Constants\Shared_Constants.cs" />
     <Compile Include="Structures\Buildings\Interfaces\IBuildingUnderground.cs" />
+    <Compile Include="Structures\Infrustructure\Roads.cs" />
+    <Compile Include="Structures\Infrustructure\Subway.cs" />
     <EmbeddedResource Include="mainform.resx">
       <DependentUpon>mainform.cs</DependentUpon>
     </EmbeddedResource>

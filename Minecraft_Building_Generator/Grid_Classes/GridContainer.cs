@@ -15,29 +15,25 @@ using System.Threading.Tasks;
 
 namespace Minecraft_Building_Generator.Grid_Classes
 {
-    public class Grid_Container : IGrid_Container
+    public class Grid_Container : Grid_Properties, IGrid_Container
     {
-        public Coordinate startCoordinate;
-        public Coordinate endCoordinate;
-        public Coordinate centerblock;
 
-        public int padding;
-        public int offset;
-        public int margin;
-        public bool isValid;
+        /*Variables*/
+        public Grid_Square[,] gridSquareMap { get; set; }
+        public List<Grid_Container> adjacent_Container_List { get; set; }
 
-        public Grid_Square[,] gridSquareMap;
-        public List<Grid_Container> adjacent_Container_List;
 
+        /*Constructor*/
         public Grid_Container(Coordinate startPoint)
         {
             startCoordinate = startPoint;
             adjacent_Container_List = new List<Grid_Container>();
         }
 
+        /*Methods*/
         public void Add_Adjacent_Container(Grid_Container adjacentContainer)
         {
-            this.adjacent_Container_List.Add(adjacentContainer);
+            adjacent_Container_List.Add(adjacentContainer);
         }
 
         public List<Grid_Container> GetAll_Adjacent_Containers()

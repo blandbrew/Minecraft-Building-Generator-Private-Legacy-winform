@@ -33,7 +33,9 @@ namespace Minecraft_Building_Generator.Structures
 
         public void Building_OutsideWalls(Coordinate startingPoint)
         {
-            Coordinate endPoint = new Coordinate(startingPoint.x + Width - 3, startingPoint.y + 150, startingPoint.z + Width - 3);
+
+            
+            Coordinate endPoint = new Coordinate(startingPoint.x + Width - 3, startingPoint.y + Height, startingPoint.z + Width - 3);
 
             //adds hollow command
             Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y} {startingPoint.z} {endPoint.x} {endPoint.y} {endPoint.z} glass 1 hollow");
