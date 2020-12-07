@@ -20,6 +20,7 @@ namespace Minecraft_Building_Generator
         void Building_Door(string direction);
         void Building_Ladder();
         void Building_Windows();
+        void Building_Rooftop(Coordinate startingPoint);
 
 
 

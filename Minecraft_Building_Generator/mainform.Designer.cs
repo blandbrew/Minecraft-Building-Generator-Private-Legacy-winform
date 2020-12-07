@@ -30,9 +30,9 @@ namespace Minecraft_Building_Generator
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainform));
-            this.label_city_generator = new System.Windows.Forms.Label();
             this.groupbox_coordinates = new System.Windows.Forms.GroupBox();
-            this.button_generate = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label_export_complete = new System.Windows.Forms.Label();
             this.dynamic_label_generated_size = new System.Windows.Forms.Label();
             this.label_size_generated = new System.Windows.Forms.Label();
             this.comboBox_how_large = new System.Windows.Forms.ComboBox();
@@ -44,6 +44,7 @@ namespace Minecraft_Building_Generator
             this.label_startcoordinate_y = new System.Windows.Forms.Label();
             this.textbox_startcoordinate_x = new System.Windows.Forms.TextBox();
             this.label_startcoordinate_x = new System.Windows.Forms.Label();
+            this.button_generate = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tab_behaviorpack = new System.Windows.Forms.TabPage();
             this.textBox_tab_minecraftversion_3 = new System.Windows.Forms.TextBox();
@@ -57,28 +58,31 @@ namespace Minecraft_Building_Generator
             this.textBox_tab_UUID = new System.Windows.Forms.TextBox();
             this.textBox_tab_minecraftversion_1 = new System.Windows.Forms.TextBox();
             this.label_tab_minecraftversion = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label_export_complete = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tabpage_grid_planning = new System.Windows.Forms.TabPage();
+            this.panel_grid_planning = new System.Windows.Forms.Panel();
+            this.menustrip_mainform = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.minecraftCityGeneratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel_grid_square_planning = new System.Windows.Forms.Panel();
             this.groupbox_coordinates.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_behaviorpack.SuspendLayout();
+            this.menustrip_mainform.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label_city_generator
-            // 
-            this.label_city_generator.AutoSize = true;
-            this.label_city_generator.Location = new System.Drawing.Point(12, 9);
-            this.label_city_generator.Name = "label_city_generator";
-            this.label_city_generator.Size = new System.Drawing.Size(463, 73);
-            this.label_city_generator.TabIndex = 0;
-            this.label_city_generator.Text = "City Generator";
             // 
             // groupbox_coordinates
             // 
             this.groupbox_coordinates.Controls.Add(this.label1);
             this.groupbox_coordinates.Controls.Add(this.label_export_complete);
-            this.groupbox_coordinates.Controls.Add(this.button_generate);
             this.groupbox_coordinates.Controls.Add(this.dynamic_label_generated_size);
             this.groupbox_coordinates.Controls.Add(this.label_size_generated);
             this.groupbox_coordinates.Controls.Add(this.comboBox_how_large);
@@ -91,23 +95,31 @@ namespace Minecraft_Building_Generator
             this.groupbox_coordinates.Controls.Add(this.textbox_startcoordinate_x);
             this.groupbox_coordinates.Controls.Add(this.label_startcoordinate_x);
             this.groupbox_coordinates.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupbox_coordinates.Location = new System.Drawing.Point(25, 103);
+            this.groupbox_coordinates.Location = new System.Drawing.Point(12, 47);
             this.groupbox_coordinates.Name = "groupbox_coordinates";
-            this.groupbox_coordinates.Size = new System.Drawing.Size(398, 263);
+            this.groupbox_coordinates.Size = new System.Drawing.Size(338, 263);
             this.groupbox_coordinates.TabIndex = 1;
             this.groupbox_coordinates.TabStop = false;
             this.groupbox_coordinates.Text = "Coordinates";
             // 
-            // button_generate
+            // label1
             // 
-            this.button_generate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_generate.Location = new System.Drawing.Point(19, 222);
-            this.button_generate.Name = "button_generate";
-            this.button_generate.Size = new System.Drawing.Size(134, 35);
-            this.button_generate.TabIndex = 3;
-            this.button_generate.Text = "Generate";
-            this.button_generate.UseVisualStyleBackColor = true;
-            this.button_generate.Click += new System.EventHandler(this.button_generate_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.label1.Location = new System.Drawing.Point(31, 119);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(132, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "each container is 169x169";
+            // 
+            // label_export_complete
+            // 
+            this.label_export_complete.AutoSize = true;
+            this.label_export_complete.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label_export_complete.Location = new System.Drawing.Point(184, 231);
+            this.label_export_complete.Name = "label_export_complete";
+            this.label_export_complete.Size = new System.Drawing.Size(0, 18);
+            this.label_export_complete.TabIndex = 12;
             // 
             // dynamic_label_generated_size
             // 
@@ -150,7 +162,7 @@ namespace Minecraft_Building_Generator
             this.comboBox_how_large.Location = new System.Drawing.Point(191, 93);
             this.comboBox_how_large.Name = "comboBox_how_large";
             this.comboBox_how_large.Size = new System.Drawing.Size(54, 32);
-            this.comboBox_how_large.TabIndex = 9;
+            this.comboBox_how_large.TabIndex = 4;
             this.comboBox_how_large.SelectedIndexChanged += new System.EventHandler(this.comboBox_how_large_SelectedIndexChanged);
             // 
             // label_how_large
@@ -180,7 +192,7 @@ namespace Minecraft_Building_Generator
             this.textbox_startcoordinate_z.MaxLength = 5;
             this.textbox_startcoordinate_z.Name = "textbox_startcoordinate_z";
             this.textbox_startcoordinate_z.Size = new System.Drawing.Size(55, 26);
-            this.textbox_startcoordinate_z.TabIndex = 5;
+            this.textbox_startcoordinate_z.TabIndex = 3;
             // 
             // label_startcoordinate_z
             // 
@@ -199,7 +211,7 @@ namespace Minecraft_Building_Generator
             this.textbox_startcoordinate_y.MaxLength = 5;
             this.textbox_startcoordinate_y.Name = "textbox_startcoordinate_y";
             this.textbox_startcoordinate_y.Size = new System.Drawing.Size(55, 26);
-            this.textbox_startcoordinate_y.TabIndex = 3;
+            this.textbox_startcoordinate_y.TabIndex = 2;
             // 
             // label_startcoordinate_y
             // 
@@ -230,16 +242,27 @@ namespace Minecraft_Building_Generator
             this.label_startcoordinate_x.TabIndex = 0;
             this.label_startcoordinate_x.Text = "X :";
             // 
+            // button_generate
+            // 
+            this.button_generate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_generate.Location = new System.Drawing.Point(143, 428);
+            this.button_generate.Name = "button_generate";
+            this.button_generate.Size = new System.Drawing.Size(134, 35);
+            this.button_generate.TabIndex = 3;
+            this.button_generate.Text = "Generate";
+            this.button_generate.UseVisualStyleBackColor = true;
+            this.button_generate.Click += new System.EventHandler(this.button_generate_Click);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tab_behaviorpack);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabpage_grid_planning);
             this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(481, 29);
+            this.tabControl1.Location = new System.Drawing.Point(419, 440);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(562, 416);
+            this.tabControl1.Size = new System.Drawing.Size(567, 131);
             this.tabControl1.TabIndex = 2;
             // 
             // tab_behaviorpack
@@ -259,7 +282,7 @@ namespace Minecraft_Building_Generator
             this.tab_behaviorpack.Location = new System.Drawing.Point(4, 25);
             this.tab_behaviorpack.Name = "tab_behaviorpack";
             this.tab_behaviorpack.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_behaviorpack.Size = new System.Drawing.Size(554, 387);
+            this.tab_behaviorpack.Size = new System.Drawing.Size(598, 387);
             this.tab_behaviorpack.TabIndex = 0;
             this.tab_behaviorpack.Text = "Behavior Pack";
             // 
@@ -351,64 +374,152 @@ namespace Minecraft_Building_Generator
             this.label_tab_minecraftversion.TabIndex = 0;
             this.label_tab_minecraftversion.Text = "Minimum Version:";
             // 
-            // tabPage2
+            // tabpage_grid_planning
             // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(554, 387);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabpage_grid_planning.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.tabpage_grid_planning.Location = new System.Drawing.Point(4, 25);
+            this.tabpage_grid_planning.Name = "tabpage_grid_planning";
+            this.tabpage_grid_planning.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpage_grid_planning.Size = new System.Drawing.Size(559, 102);
+            this.tabpage_grid_planning.TabIndex = 1;
+            this.tabpage_grid_planning.Text = "Grid Planning";
             // 
-            // label_export_complete
+            // panel_grid_planning
             // 
-            this.label_export_complete.AutoSize = true;
-            this.label_export_complete.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_export_complete.Location = new System.Drawing.Point(184, 231);
-            this.label_export_complete.Name = "label_export_complete";
-            this.label_export_complete.Size = new System.Drawing.Size(0, 18);
-            this.label_export_complete.TabIndex = 12;
+            this.panel_grid_planning.Location = new System.Drawing.Point(6, 28);
+            this.panel_grid_planning.Name = "panel_grid_planning";
+            this.panel_grid_planning.Size = new System.Drawing.Size(279, 302);
+            this.panel_grid_planning.TabIndex = 0;
+            this.panel_grid_planning.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_grid_planning_Paint);
+            this.panel_grid_planning.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel_grid_planning_MouseClick);
             // 
-            // label1
+            // menustrip_mainform
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.label1.Location = new System.Drawing.Point(31, 119);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 13);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "each container is 169x169";
+            this.menustrip_mainform.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.settingsToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.menustrip_mainform.Location = new System.Drawing.Point(0, 0);
+            this.menustrip_mainform.Name = "menustrip_mainform";
+            this.menustrip_mainform.Size = new System.Drawing.Size(1136, 24);
+            this.menustrip_mainform.TabIndex = 3;
+            this.menustrip_mainform.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Text = "Load";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(97, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.exitToolStripMenuItem.Text = "Quit";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.preferencesToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.preferencesToolStripMenuItem.Text = "Preferences";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.minecraftCityGeneratorToolStripMenuItem});
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // minecraftCityGeneratorToolStripMenuItem
+            // 
+            this.minecraftCityGeneratorToolStripMenuItem.Name = "minecraftCityGeneratorToolStripMenuItem";
+            this.minecraftCityGeneratorToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.minecraftCityGeneratorToolStripMenuItem.Text = "Minecraft City Generator";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.panel_grid_square_planning);
+            this.groupBox1.Controls.Add(this.panel_grid_planning);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(356, 47);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(630, 336);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Grid Planning";
+            // 
+            // panel_grid_square_planning
+            // 
+            this.panel_grid_square_planning.Location = new System.Drawing.Point(291, 28);
+            this.panel_grid_square_planning.Name = "panel_grid_square_planning";
+            this.panel_grid_square_planning.Size = new System.Drawing.Size(255, 254);
+            this.panel_grid_square_planning.TabIndex = 1;
+            //this.panel_grid_square_planning.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_grid_square_planning_Paint);
             // 
             // mainform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(38F, 73F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1052, 511);
+            this.ClientSize = new System.Drawing.Size(1136, 635);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupbox_coordinates);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.label_city_generator);
+            this.Controls.Add(this.button_generate);
+            this.Controls.Add(this.menustrip_mainform);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.MainMenuStrip = this.menustrip_mainform;
             this.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
             this.Name = "mainform";
             this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Minecraft City Generator";
             this.groupbox_coordinates.ResumeLayout(false);
             this.groupbox_coordinates.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tab_behaviorpack.ResumeLayout(false);
             this.tab_behaviorpack.PerformLayout();
+            this.menustrip_mainform.ResumeLayout(false);
+            this.menustrip_mainform.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label_city_generator;
         private System.Windows.Forms.GroupBox groupbox_coordinates;
         private System.Windows.Forms.TextBox textbox_startcoordinate_z;
         private System.Windows.Forms.Label label_startcoordinate_z;
@@ -420,7 +531,7 @@ namespace Minecraft_Building_Generator
         private System.Windows.Forms.Label label_how_large;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tab_behaviorpack;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabpage_grid_planning;
         private System.Windows.Forms.Button button_generate;
         private System.Windows.Forms.TextBox textBox_tab_minecraftversion_1;
         private System.Windows.Forms.Label label_tab_minecraftversion;
@@ -438,6 +549,19 @@ namespace Minecraft_Building_Generator
         private System.Windows.Forms.Label label_size_generated;
         private System.Windows.Forms.Label label_export_complete;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel_grid_planning;
+        private System.Windows.Forms.MenuStrip menustrip_mainform;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem minecraftCityGeneratorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Panel panel_grid_square_planning;
     }
 }
 

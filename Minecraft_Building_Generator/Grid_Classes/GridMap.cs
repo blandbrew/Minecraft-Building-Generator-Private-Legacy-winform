@@ -33,8 +33,10 @@
 
 
 using Minecraft_Building_Generator.Grid_Classes;
+using Minecraft_Building_Generator.UI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -131,7 +133,7 @@ namespace Minecraft_Building_Generator
 
 
                 int _container = (int)Math.Sqrt(GridMap.number_of_Grid_Containers);
-                Console.WriteLine("Size of Containers: " + _container);
+                //Console.WriteLine("Size of Containers: " + _container);
                 PrimaryGridMap = new Grid_Container[_container, _container];
 
                 //Sets the primary grid Map
@@ -149,19 +151,16 @@ namespace Minecraft_Building_Generator
         /// <returns></returns>
         private void Map_out_GridContainer(Coordinate startPoint, Grid_Container[,] PrimaryGridMap)
         {
-            double containerSize;
-            if (number_of_Grid_Containers == 1)
-                containerSize = 1;
-            else
-                containerSize = Math.Sqrt(number_of_Grid_Containers);
+
+            double containerSize = ContainerSize();
 
             int _tempX = startPoint.x;
             int _tempY = startPoint.y;
             int _tempZ = startPoint.z;
 
-            //try
-            //{
-               
+            try
+            {
+
                 for (int i = 0; i < containerSize; i++)
                 {
                     for (int k = 0; k < containerSize; k++)
@@ -183,10 +182,11 @@ namespace Minecraft_Building_Generator
                             );
 
                         aGridContainer.isValid = true;
-               
+                        
+
                         PrimaryGridMap[i, k] = aGridContainer;
                         _tempX = aGridContainer.startCoordinate.x + Shared_Constants.GRID_CONTAINER_SIZE; //adds one on to mark the start point of next grid   
-                        Console.WriteLine("length of gridmap 1st: " + PrimaryGridMap.Length);
+                       
                 }
                     if (containerSize > 1)
                     {
@@ -198,16 +198,16 @@ namespace Minecraft_Building_Generator
 
                 this.PrimaryGridMap = PrimaryGridMap;
 
-            //} catch(Exception err)
-            //{
-            //    MessageBox.Show(err.Message, "Grid Map Generator Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
-            //}
+        } catch(Exception err)
+            {
+                MessageBox.Show(err.Message, "Grid Map Generator Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
 
 
 
 
-        }
+}
 
 
         /// <summary>
@@ -216,11 +216,7 @@ namespace Minecraft_Building_Generator
         /// <param name="PrimaryGridMap"></param>
         private void Generate_Grid_Squares(Grid_Container[,] PrimaryGridMap)
         {
-            double containerSize;
-            if (number_of_Grid_Containers == 1)
-                containerSize = 1;
-            else
-                containerSize = Math.Sqrt(number_of_Grid_Containers);
+            double containerSize = ContainerSize();
 
             for (int i = 0; i < containerSize; i++)
             {
@@ -258,6 +254,7 @@ namespace Minecraft_Building_Generator
                                 );
 
                             aSquare.isValid = true;
+                       
                             aGridSquareMap[m, n] = aSquare;
 
                             _tempX = aSquare.startCoordinate.x + Shared_Constants.GRID_SQUARE_SIZE;
@@ -282,11 +279,7 @@ namespace Minecraft_Building_Generator
         public void Generate_Adjacent_Containers(Grid_Container[,] PrimaryGridMap)
         {
 
-            double containerSize;
-            if (number_of_Grid_Containers == 1)
-                containerSize = 1;
-            else
-                containerSize = Math.Sqrt(number_of_Grid_Containers);
+            double containerSize = ContainerSize();
 
             for (int i = 0; i < containerSize; i++)
             {
@@ -338,11 +331,7 @@ namespace Minecraft_Building_Generator
         /// <param name="PrimaryGridMap"></param>
         private void Generate_Adjacent_Grid_Squares(Grid_Container[,] PrimaryGridMap)
         {
-            double containerSize;
-            if (number_of_Grid_Containers == 1)
-                containerSize = 1;
-            else
-                containerSize = Math.Sqrt(number_of_Grid_Containers);
+            double containerSize = ContainerSize();
 
             for (int i = 0; i < containerSize; i++)
             {
@@ -395,6 +384,13 @@ namespace Minecraft_Building_Generator
         }
 
 
-        
+        public double ContainerSize()
+        {
+            double containerSize;
+            if (number_of_Grid_Containers == 1)
+                return containerSize = 1;
+            else
+                return containerSize = Math.Sqrt(number_of_Grid_Containers);
+        }
     }
 }

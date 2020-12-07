@@ -101,11 +101,11 @@ namespace Minecraft_Building_Generator.Command_Generator
 
             if(start + chunk > generatedFunctionLines.Count)
             {
-                Console.WriteLine("Chunk: " + chunk);
-                Console.WriteLine("start: " + start);
-                Console.WriteLine("total: " + generatedFunctionLines.Count);
+                //Console.WriteLine("Chunk: " + chunk);
+                //Console.WriteLine("start: " + start);
+                //Console.WriteLine("total: " + generatedFunctionLines.Count);
                 int remaining = (start + chunk) - generatedFunctionLines.Count;
-                Console.WriteLine("remaining: " + remaining);
+                //Console.WriteLine("remaining: " + remaining);
                 return commands = generatedFunctionLines.GetRange(start, remaining);
             } else
             {
@@ -120,13 +120,13 @@ namespace Minecraft_Building_Generator.Command_Generator
         private int DivideCommands()
         {
             int number_of_commands = generatedFunctionLines.Count;
-            Console.WriteLine("Number of commands: " + number_of_commands);
+            //Console.WriteLine("Number of commands: " + number_of_commands);
             double chunks_of_commands = 1;
 
             if(number_of_commands > Shared_Constants.MAX_NUMBER_OF_COMMANDS)
             {
                 chunks_of_commands = (double) number_of_commands / (double)Shared_Constants.MAX_NUMBER_OF_COMMANDS;
-                Console.WriteLine(chunks_of_commands);
+                //Console.WriteLine(chunks_of_commands);
                 chunks_of_commands = Math.Ceiling(chunks_of_commands);
                 
             } 
@@ -143,8 +143,8 @@ namespace Minecraft_Building_Generator.Command_Generator
                 {
                     
                     Grid_Container aContainer = map[i, j];
-                    Console.WriteLine("Acontainer.length: " + map.Length);
-                    Console.WriteLine("aContainer start coord " + aContainer.startCoordinate.x);
+                    //Console.WriteLine("Acontainer.length: " + map.Length);
+                    //Console.WriteLine("aContainer start coord " + aContainer.startCoordinate.x);
                     generatedGridContainer_Commands.Add(
                         "fill " + aContainer.startCoordinate.x +
                         " " + aContainer.startCoordinate.y +
@@ -164,19 +164,6 @@ namespace Minecraft_Building_Generator.Command_Generator
 
 
 
-        //private void ExportFunctionLines()
-        //{
-        //    // Set a variable to the Documents path.
-        //    string docPath =
-        //      Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-        //    // Write the string array to a new file named "WriteLines.txt".
-        //    using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "cityGenerator.mcfunction")))
-        //    {
-        //        foreach (string line in generatedFunctionLines)
-        //            outputFile.WriteLine(line);
-        //    }
-        //}
 
         /**
          * This is a functional test to demonstrate that the squares are all individually generated procedurally and they can such be recalled.

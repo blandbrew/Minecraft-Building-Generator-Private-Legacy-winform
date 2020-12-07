@@ -12,6 +12,10 @@ namespace Minecraft_Building_Generator.Grid_Classes
 {
     public class Grid_Square : Grid_Properties, IGrid_Square
     {
+        //more properties needed here to define what type of thing will be built here. such as road, commercial building class, residential, skyscraper etc.
+
+
+
 
         /*Variables*/
         /// <summary>

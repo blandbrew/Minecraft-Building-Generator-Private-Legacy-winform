@@ -7,6 +7,7 @@
  * 
  */
 
+using Minecraft_Building_Generator.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace Minecraft_Building_Generator.Grid_Classes
         /*Variables*/
         public Grid_Square[,] gridSquareMap { get; set; }
         public List<Grid_Container> adjacent_Container_List { get; set; }
+        
 
 
         /*Constructor*/

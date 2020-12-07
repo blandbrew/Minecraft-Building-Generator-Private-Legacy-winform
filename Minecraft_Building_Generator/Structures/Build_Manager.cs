@@ -50,11 +50,16 @@ namespace Minecraft_Building_Generator.Structures
 
                             
                             int randomHeight = rand.Next(20, 40);
-                            //Console.WriteLine(randomHeight);
+                            while (randomHeight % 4 != 0)//ensures that every building has a rooftop
+                            {
+                                randomHeight = rand.Next(20, 40);
+                            }
+
                             GenericBuilding gb = new GenericBuilding(randomHeight, BuildingClass.Commercial);
 
                             gb.Building_OutsideWalls(aSquare.startCoordinate);
                             gb.Building_Floor(aSquare.startCoordinate);
+                            gb.Building_Rooftop(aSquare.centerblock);
 
                         }
                     }

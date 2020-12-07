@@ -35,7 +35,7 @@ namespace Minecraft_Building_Generator.Structures
         {
 
             
-            Coordinate endPoint = new Coordinate(startingPoint.x + Width - 3, startingPoint.y + Height, startingPoint.z + Width - 3);
+            Coordinate endPoint = new Coordinate(startingPoint.x + Width-3, startingPoint.y + Height, startingPoint.z + Width-3);
 
             //adds hollow command
             Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y} {startingPoint.z} {endPoint.x} {endPoint.y} {endPoint.z} glass 1 hollow");
@@ -45,21 +45,17 @@ namespace Minecraft_Building_Generator.Structures
 
         public void Building_Floor(Coordinate startingPoint)
         {
-            NumberOfFloors = Height / 4;
+            NumberOfFloors = Height / 4; //adds an additional floor onto the building height...may need to reconsider this
             for (int i = 0; i < NumberOfFloors; i++)
             {
                 
                 Coordinate endPoint = new Coordinate(startingPoint.x + Width - 3, startingPoint.y + 4, startingPoint.z + Width - 3);
                 startingPoint.y += 4;
                 Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y} {startingPoint.z} {endPoint.x} {endPoint.y} {endPoint.z} stone");
-
+                
             }
 
-            
 
-            
-
-            //throw new NotImplementedException();
         }
 
         public void Building_Lighting()
@@ -80,6 +76,12 @@ namespace Minecraft_Building_Generator.Structures
         public void Building_Windows()
         {
             throw new NotImplementedException();
+        }
+
+        public void Building_Rooftop(Coordinate startPoint)
+        {
+            Generate_Commands.Add_Command($"fill {startPoint.x} {Height+6} {startPoint.z} {startPoint.x} {Height + 6} {startPoint.z} concrete 6");
+            //throw new NotImplementedException();
         }
     }
 }
