@@ -78,8 +78,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Constants\Shared_Constants.cs" />
     <Compile Include="Structures\Buildings\Interfaces\IBuildingUnderground.cs" />
+    <Compile Include="Structures\Infrustructure\Interfaces\IRoad.cs" />
     <Compile Include="Structures\Infrustructure\Roads.cs" />
     <Compile Include="Structures\Infrustructure\Subway.cs" />
+    <Compile Include="UI\UI_GridPanel.cs" />
     <Compile Include="UI\UI_Grid_Planning_Rectangle.cs" />
     <EmbeddedResource Include="mainform.resx">
       <DependentUpon>mainform.cs</DependentUpon>

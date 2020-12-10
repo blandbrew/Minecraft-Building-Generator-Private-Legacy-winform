@@ -17,9 +17,13 @@ namespace Minecraft_Building_Generator
     public partial class mainform : Form
     {
         GridMap aMap { get; set; }
-        List<UI_Grid_Planning_Rectangle> gridPlanner { get; set; }
+        //List<UI_Grid_Planning_Rectangle> gridPlanner { get; set; }
+        List<UI_Grid_Planning_Rectangle> gridsqarePlanner { get; set; }
         Graphics gridcontainer_planning_graphic { get; set; }
         Graphics gridsquare_planning_graphic { get; set; }
+
+        UI_GridPanel gridcontainerPanel { get; set; }
+        UI_GridPanel gridsquarePanel { get; set; }
         public mainform()
         {
 
@@ -57,9 +61,12 @@ namespace Minecraft_Building_Generator
             /*Version*/
             textBox_behaviorpack_version.Text = "1.0";
 
-            gridPlanner = new List<UI_Grid_Planning_Rectangle>();
-            gridcontainer_planning_graphic = panel_grid_planning.CreateGraphics();
-            gridsquare_planning_graphic = panel_grid_square_planning.CreateGraphics();
+            //gridPlanner = new List<UI_Grid_Planning_Rectangle>();
+
+
+            gridcontainerPanel = new UI_GridPanel(panel_grid_planning);
+            gridsquarePanel = new UI_GridPanel(panel_grid_square_planning);
+           
         }
 
 
@@ -87,22 +94,13 @@ namespace Minecraft_Building_Generator
         }
 
 
-
+        /**
+         * Button handling methods
+         */
         private void button_generate_Click(object sender, EventArgs e)
         {
             label_export_complete.Text = "";
             label_export_complete.Refresh();
-
-            //string selected = comboBox_how_large.SelectedItem.ToString();
-            //int selectedSize = int.Parse(selected);
-
-            //GridMap aMap = new GridMap(
-            //    int.Parse(textbox_startcoordinate_x.Text),
-            //    int.Parse(textbox_startcoordinate_y.Text),
-            //    int.Parse(textbox_startcoordinate_z.Text),
-            //    selectedSize);
-
-            //aMap.GenerateGrids();
 
             Generate_Commands gc = new Generate_Commands();
             Build_Manager bm = new Build_Manager(aMap.PrimaryGridMap);
@@ -112,78 +110,33 @@ namespace Minecraft_Building_Generator
             label_export_complete.Text = status;
         }
 
+
+
+
+        
+        /**
+         * Panel Paint Methods
+         */
         private void panel_grid_planning_Paint(object sender, PaintEventArgs e)
         {
+            string selected = comboBox_how_large.SelectedItem.ToString();
+            int selectedSize = int.Parse(selected);
+            gridcontainerPanel.DrawGrid((int)Math.Sqrt(selectedSize), gridcontainerPanel.gridPanel.CreateGraphics());
             
-
-            //Builds a grid of Grid Containers based on the selected Size
-            if(comboBox_how_large.SelectedItem != null)
-            {
-                SolidBrush aBrush = new SolidBrush(Color.White);
-                Pen p = new Pen(Color.Black);
-
-
-
-                //extracts the selected number of grid containers
-                int _size = int.Parse(comboBox_how_large.SelectedItem.ToString());
-                double squareSize = Math.Sqrt(_size);//gets the square root so we know how many grid containers on each side
-
-                //Grid_production
-                int separatorValue = 17;
-                int x = 10;
-                int y = 10;
-                int maxX=1;
-                int maxY=1;
-
-                for (int i = 0; i < squareSize; i++)
-                {
-                    gridcontainer_planning_graphic.FillRectangle(aBrush, x, y, 15, 15);
-
-                    for (int j = 0; j < squareSize; j++)
-                    {
-                        
-                        Rectangle _rect = new Rectangle(x, y, 15, 15);
-                        gridPlanner.Add(new UI_Grid_Planning_Rectangle(i,j, _rect));
-                        gridcontainer_planning_graphic.FillRectangle(aBrush, _rect);
-
-                        x += separatorValue;
-                    }
-                    maxX = x;
-                    maxY = y+separatorValue+10;
-                    x = 10;
-                    y += separatorValue;
-                }
-
-                gridcontainer_planning_graphic.DrawLine(p, 1, maxY, maxX, maxY); //Draws horizontal graph line
-                gridcontainer_planning_graphic.DrawLine(p, 1, 1, 1, maxY); //draws vertical graph line
-                
-
-            }
-
+        }
+      
+        private void panel_grid_square_planning_Paint(object sender, PaintEventArgs e)
+        {
+            gridsquarePanel.DrawGrid(Shared_Constants.GRID_SQUARE_SIZE, gridsquarePanel.gridPanel.CreateGraphics());
         }
 
+
+        /**
+         * Mouse Click Handling Methods
+         */
         private void panel_grid_planning_MouseClick(Object sender, MouseEventArgs e)
         {
-            Console.WriteLine("Mouse Clicked");
-            foreach (UI_Grid_Planning_Rectangle rectangle in gridPlanner)
-            {
-                if (rectangle.rect.Contains(e.Location) && rectangle.selected_container == false)
-                {
-                    SolidBrush sb = new SolidBrush(Color.Red);
-                    gridcontainer_planning_graphic.FillRectangle(sb, rectangle.rect);
-                    Draw_Grid_Square_Planner();
-                    rectangle.selected_container = true;
-                } else if (rectangle.rect.Contains(e.Location) && rectangle.selected_container == true)
-                {
-                    SolidBrush sb = new SolidBrush(Color.White);
-                    gridcontainer_planning_graphic.FillRectangle(sb, rectangle.rect);
-                    rectangle.selected_container = false;
-                    gridsquare_planning_graphic.Clear(BackColor);
-                }
-
-            }
-            
-
+            gridcontainerPanel.UI_Grid_MouseClickEvents(sender, e);
         }
 
 
@@ -212,7 +165,7 @@ namespace Minecraft_Building_Generator
                 {
 
                     Rectangle _rect = new Rectangle(x, y, 15, 15);
-                    //gridPlanner.Add(new UI_Grid_Planning_Rectangle(i, j, _rect));
+                    gridsqarePlanner.Add(new UI_Grid_Planning_Rectangle( _rect));
                     gridsquare_planning_graphic.FillRectangle(aBrush, _rect);
 
                     x += separatorValue;
@@ -225,6 +178,32 @@ namespace Minecraft_Building_Generator
 
             gridsquare_planning_graphic.DrawLine(p, 1, maxY, maxX, maxY); //Draws horizontal graph line
             gridsquare_planning_graphic.DrawLine(p, 1, 1, 1, maxY); //draws vertical graph line
+        }
+
+
+        private void panel_grid_square_planning_MouseClick(Object sender, MouseEventArgs e)
+        {
+            gridsquarePanel.UI_Grid_Square_MouseClickEvents(sender, e, gridcontainerPanel.selectedUIRectangle);
+
+            //Console.WriteLine("Mouse Clicked");
+            //foreach (UI_Grid_Planning_Rectangle rectangle in gridsqarePlanner)
+            //{
+            //    if (rectangle.rect.Contains(e.Location) && rectangle.selected == false)
+            //    {
+            //        SolidBrush sb = new SolidBrush(Color.Red);
+            //        gridsquare_planning_graphic.FillRectangle(sb, rectangle.rect);
+            //        //Draw_Grid_Square_Planner();
+            //        rectangle.selected = true;
+            //    }
+            //    else if (rectangle.rect.Contains(e.Location) && rectangle.selected == true)
+            //    {
+            //        SolidBrush sb = new SolidBrush(Color.White);
+            //        gridcontainer_planning_graphic.FillRectangle(sb, rectangle.rect);
+            //        rectangle.selected = false;
+            //        //gridsquare_planning_graphic.Clear(BackColor);
+            //    }
+
+            //}
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿        //This class defines a 13x13 grid square.
-        //each can have specific properties such ash
-        //marking adjacent grids, offsets for roads, subterannian features, etc.
+﻿//This class defines a 13x13 grid square.
+//each can have specific properties such ash
+//marking adjacent grids, offsets for roads, subterannian features, etc.
 
+using Minecraft_Building_Generator.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,10 @@ namespace Minecraft_Building_Generator.Grid_Classes
 {
     public class Grid_Square : Grid_Properties, IGrid_Square
     {
-        //more properties needed here to define what type of thing will be built here. such as road, commercial building class, residential, skyscraper etc.
+        
 
-
+        //public GridSquare_Zoning zone { get; set; }
+        public UI_Grid_Planning_Rectangle ui_rectangle { get; set; }
 
 
         /*Variables*/
@@ -52,5 +54,7 @@ namespace Minecraft_Building_Generator.Grid_Classes
             return adjacent_Squares;
             throw new NotImplementedException();
         }
+
+
     }
 }

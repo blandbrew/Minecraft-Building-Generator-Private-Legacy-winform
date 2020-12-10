@@ -14,8 +14,13 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
          * 
          */
         Coordinate StartPoint;
-        int Width { get; set; } = 4;
+        int StreetWidth { get; set; } = 8;
         int SidewalkWidth { get; set; } = 2;
+
+        Coordinate CenterlineStart;
+        Coordinate CrosswalkStart;
+        
+
 
     }
 }

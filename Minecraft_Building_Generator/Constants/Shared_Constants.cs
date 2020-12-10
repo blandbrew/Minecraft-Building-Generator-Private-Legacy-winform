@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 namespace Minecraft_Building_Generator
 {
 
+    public enum GridSquare_Zoning { Infrustructure, Building, Scenery, Water, None }
     public enum BuildingClass { Residential, Commercial, Industrial, Other, None }
     public enum BuildingMaterial { Glass, Wooden, Rock, Concrete, Jewel, Other, None }
 
@@ -27,6 +29,8 @@ namespace Minecraft_Building_Generator
         public const int GRID_SQUARE_CENTER = 7;
 
         public const int MAX_NUMBER_OF_COMMANDS = 9950;
+
         
+
     }
 }

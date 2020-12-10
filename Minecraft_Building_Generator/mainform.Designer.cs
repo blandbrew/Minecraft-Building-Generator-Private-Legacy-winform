@@ -282,7 +282,7 @@ namespace Minecraft_Building_Generator
             this.tab_behaviorpack.Location = new System.Drawing.Point(4, 25);
             this.tab_behaviorpack.Name = "tab_behaviorpack";
             this.tab_behaviorpack.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_behaviorpack.Size = new System.Drawing.Size(598, 387);
+            this.tab_behaviorpack.Size = new System.Drawing.Size(559, 102);
             this.tab_behaviorpack.TabIndex = 0;
             this.tab_behaviorpack.Text = "Behavior Pack";
             // 
@@ -483,9 +483,10 @@ namespace Minecraft_Building_Generator
             // 
             this.panel_grid_square_planning.Location = new System.Drawing.Point(291, 28);
             this.panel_grid_square_planning.Name = "panel_grid_square_planning";
-            this.panel_grid_square_planning.Size = new System.Drawing.Size(255, 254);
+            this.panel_grid_square_planning.Size = new System.Drawing.Size(273, 271);
             this.panel_grid_square_planning.TabIndex = 1;
-            //this.panel_grid_square_planning.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_grid_square_planning_Paint);
+            this.panel_grid_square_planning.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_grid_square_planning_Paint);
+            this.panel_grid_square_planning.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseClick);
             // 
             // mainform
             // 
