@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace Minecraft_Building_Generator
 {
 
-    public enum GridSquare_Zoning { Infrustructure, Building, Scenery, Water, None }
+    public enum gridsquare_legend { Initialized, Selected, Infrustructure, Building, Scenery, water };
+    public enum GridSquare_Zoning { Initialized, Selected, Infrustructure, Building, Scenery, Water, None }
     public enum BuildingClass { Residential, Commercial, Industrial, Other, None }
     public enum BuildingMaterial { Glass, Wooden, Rock, Concrete, Jewel, Other, None }
 

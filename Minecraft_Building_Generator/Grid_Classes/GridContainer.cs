@@ -23,7 +23,7 @@ namespace Minecraft_Building_Generator.Grid_Classes
         public Grid_Square[,] gridSquareMap { get; set; }
         public List<Grid_Container> adjacent_Container_List { get; set; }
         
-     
+        public UI_Grid_Planning_Container[,] UI_GridPlanner { get; set; }
 
 
         /*Constructor*/

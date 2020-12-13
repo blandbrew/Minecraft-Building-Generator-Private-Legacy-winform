@@ -82,7 +82,9 @@
     <Compile Include="Structures\Infrustructure\Roads.cs" />
     <Compile Include="Structures\Infrustructure\Subway.cs" />
     <Compile Include="UI\UI_GridPanel.cs" />
-    <Compile Include="UI\UI_Grid_Planning_Rectangle.cs" />
+    <Compile Include="UI\UI_GridPanel_Container.cs" />
+    <Compile Include="UI\UI_Grid_Planning_Square.cs" />
+    <Compile Include="UI\UI_Grid_Planning_Container.cs" />
     <EmbeddedResource Include="mainform.resx">
       <DependentUpon>mainform.cs</DependentUpon>
     </EmbeddedResource>

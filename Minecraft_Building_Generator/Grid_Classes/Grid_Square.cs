@@ -16,7 +16,7 @@ namespace Minecraft_Building_Generator.Grid_Classes
         
 
         //public GridSquare_Zoning zone { get; set; }
-        public UI_Grid_Planning_Rectangle ui_rectangle { get; set; }
+        public UI_Grid_Planning_Container ui_rectangle { get; set; }
 
 
         /*Variables*/
