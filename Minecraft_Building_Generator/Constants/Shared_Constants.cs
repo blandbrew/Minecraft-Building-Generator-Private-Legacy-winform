@@ -9,7 +9,7 @@ namespace Minecraft_Building_Generator
 {
 
     public enum gridsquare_legend { Initialized, Selected, Infrustructure, Building, Scenery, water };
-    public enum GridSquare_Zoning { Initialized, Selected, Infrustructure, Building, Scenery, Water, None }
+    public enum GridSquare_Zoning { Initialized, Selected, Infrustructure, Building, Scenery, Water, Road, None }
     public enum BuildingClass { Residential, Commercial, Industrial, Other, None }
     public enum BuildingMaterial { Glass, Wooden, Rock, Concrete, Jewel, Other, None }
 
@@ -28,6 +28,8 @@ namespace Minecraft_Building_Generator
         public const int MAX_FILL = 32768;
         public const int GRID_CONTAINER_CENTER = 85;
         public const int GRID_SQUARE_CENTER = 7;
+
+        public const int UI_GRID_RECTANGLE_SIZE = 13;
 
         public const int MAX_NUMBER_OF_COMMANDS = 9950;
 

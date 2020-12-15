@@ -15,10 +15,6 @@ namespace Minecraft_Building_Generator.UI
         public SolidBrush gridPanelBrush { get; set; }
         public Graphics gridPanelGraphics { get; set; }
 
-
-
-        public UI_Grid_Planning_Container selectedUIRectangle { get; private set; }
-
         private SolidBrush brush_Initialized = new SolidBrush(Color.White);
         private SolidBrush brush_Selected = new SolidBrush(Color.Red);
         private SolidBrush brush_Infrustructure = new SolidBrush(Color.Black);

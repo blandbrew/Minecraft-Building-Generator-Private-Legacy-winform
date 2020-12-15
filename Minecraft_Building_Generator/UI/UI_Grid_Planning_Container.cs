@@ -10,11 +10,13 @@ namespace Minecraft_Building_Generator.UI
     public class UI_Grid_Planning_Container
     {
         public Rectangle rect { get; set; }
+
         public bool selected { get; set; } = false;
         public GridSquare_Zoning zone { get; set; }
 
         public UI_Grid_Planning_Square[,] UI_Grid_Planning_Squares { get; set; }
-
+        public Point UI_Grid_Planning_Square_MaxX { get; set; }
+        public Point UI_Grid_Planning_Square_MaxY { get; set; }
 
 
         /// <summary>
@@ -24,7 +26,7 @@ namespace Minecraft_Building_Generator.UI
         public UI_Grid_Planning_Container(Rectangle rectangle)
         {
             rect = rectangle;
-
+            
         }
         //public UI_Grid_Planning_Rectangle(Rectangle rectangle, GridSquare_Zoning setZone)
         //{

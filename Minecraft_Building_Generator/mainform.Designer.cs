@@ -71,6 +71,10 @@ namespace Minecraft_Building_Generator
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.minecraftCityGeneratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton_water = new System.Windows.Forms.RadioButton();
+            this.radioButton_scenery = new System.Windows.Forms.RadioButton();
+            this.radioButton_road = new System.Windows.Forms.RadioButton();
+            this.radioButton_building = new System.Windows.Forms.RadioButton();
             this.panel_grid_square_planning = new System.Windows.Forms.Panel();
             this.groupbox_coordinates.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -469,15 +473,71 @@ namespace Minecraft_Building_Generator
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioButton_water);
+            this.groupBox1.Controls.Add(this.radioButton_scenery);
+            this.groupBox1.Controls.Add(this.radioButton_road);
+            this.groupBox1.Controls.Add(this.radioButton_building);
             this.groupBox1.Controls.Add(this.panel_grid_square_planning);
             this.groupBox1.Controls.Add(this.panel_grid_planning);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(356, 47);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(630, 336);
+            this.groupBox1.Size = new System.Drawing.Size(630, 387);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Grid Planning";
+            // 
+            // radioButton_water
+            // 
+            this.radioButton_water.AutoSize = true;
+            this.radioButton_water.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton_water.Location = new System.Drawing.Point(476, 302);
+            this.radioButton_water.Name = "radioButton_water";
+            this.radioButton_water.Size = new System.Drawing.Size(84, 17);
+            this.radioButton_water.TabIndex = 6;
+            this.radioButton_water.TabStop = true;
+            this.radioButton_water.Text = "Water (Blue)";
+            this.radioButton_water.UseVisualStyleBackColor = true;
+            this.radioButton_water.CheckedChanged += new System.EventHandler(this.AllRadioButtons_CheckedChanged);
+            // 
+            // radioButton_scenery
+            // 
+            this.radioButton_scenery.AutoSize = true;
+            this.radioButton_scenery.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton_scenery.Location = new System.Drawing.Point(291, 325);
+            this.radioButton_scenery.Name = "radioButton_scenery";
+            this.radioButton_scenery.Size = new System.Drawing.Size(102, 17);
+            this.radioButton_scenery.TabIndex = 5;
+            this.radioButton_scenery.TabStop = true;
+            this.radioButton_scenery.Text = "Scenery (Green)";
+            this.radioButton_scenery.UseVisualStyleBackColor = true;
+            this.radioButton_scenery.CheckedChanged += new System.EventHandler(this.AllRadioButtons_CheckedChanged);
+            // 
+            // radioButton_road
+            // 
+            this.radioButton_road.AutoSize = true;
+            this.radioButton_road.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton_road.Location = new System.Drawing.Point(387, 302);
+            this.radioButton_road.Name = "radioButton_road";
+            this.radioButton_road.Size = new System.Drawing.Size(87, 17);
+            this.radioButton_road.TabIndex = 4;
+            this.radioButton_road.TabStop = true;
+            this.radioButton_road.Text = "Road (Black)";
+            this.radioButton_road.UseVisualStyleBackColor = true;
+            this.radioButton_road.CheckedChanged += new System.EventHandler(this.AllRadioButtons_CheckedChanged);
+            // 
+            // radioButton_building
+            // 
+            this.radioButton_building.AutoSize = true;
+            this.radioButton_building.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton_building.Location = new System.Drawing.Point(291, 302);
+            this.radioButton_building.Name = "radioButton_building";
+            this.radioButton_building.Size = new System.Drawing.Size(90, 17);
+            this.radioButton_building.TabIndex = 3;
+            this.radioButton_building.TabStop = true;
+            this.radioButton_building.Text = "Building(Grey)";
+            this.radioButton_building.UseVisualStyleBackColor = true;
+            this.radioButton_building.CheckedChanged += new System.EventHandler(this.AllRadioButtons_CheckedChanged);
             // 
             // panel_grid_square_planning
             // 
@@ -515,6 +575,7 @@ namespace Minecraft_Building_Generator
             this.menustrip_mainform.ResumeLayout(false);
             this.menustrip_mainform.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -563,6 +624,10 @@ namespace Minecraft_Building_Generator
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel_grid_square_planning;
+        private System.Windows.Forms.RadioButton radioButton_building;
+        private System.Windows.Forms.RadioButton radioButton_scenery;
+        private System.Windows.Forms.RadioButton radioButton_road;
+        private System.Windows.Forms.RadioButton radioButton_water;
     }
 }
 
