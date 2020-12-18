@@ -17,31 +17,20 @@ namespace Minecraft_Building_Generator
     public partial class mainform : Form
     {
         GridMap aMap { get; set; } //Complete layout of the grid
-        UI_Grid_Planning_Container[,] GridPlanner_Map { get; set; } //handles UI grid layout
+        UI_GridMap UI_Map { get; set; } //complete layout of the UI_Grid
 
+        //UI_Grid_Planning_Container[,] GridPlanner_Map { get; set; } //handles UI grid layout
 
-
-        //List<UI_Grid_Planning_Rectangle> gridPlanner { get; set; }
-        //List<UI_Grid_Planning_Container> gridsqarePlanner { get; set; }
-        //Graphics gridcontainer_planning_graphic { get; set; }
-        //Graphics gridsquare_planning_graphic { get; set; }
-
-
-        /*UI Panels*/
+                /*UI Panels*/
         UI_GridPanel gridcontainerPanel { get; set; }
         UI_GridPanel gridsquarePanel { get; set; }
+
+        private int Grid_Load_Size { get; set; } = 1;
         
         /*Important Variables that track states of the application for comparison*/
         private UI_Grid_Planning_Container selected_container { get; set; }
         private UI_Grid_Planning_Container previouslySelected { get; set; }
         private GridSquare_Zoning selected_radioButton_gridzone { get; set; }
-        private int perviousSizeOfGrid { get; set; }
-
-        /*Used for Drawing on the UI Grid - sizes vary due to potential dynamic shift*/
-        private int UI_squares_draw_Direction_Max_X { get; set; }
-        private int UI_squares_draw_Direction_Max_Y { get; set; }
-        private int UI_Container_draw_Direction_Max_X { get; set; }
-        private int UI_Container_draw_Direction_Max_Y { get; set; }
 
 
 
@@ -49,9 +38,18 @@ namespace Minecraft_Building_Generator
         {
 
             InitializeComponent();
+            UI_Map = new UI_GridMap();
+            Initialize_UI_Grid();
             Initialize_CityGenerator_Form();
             
             //Size = new Size(500, 500);
+        }
+
+        private void Initialize_UI_Grid()
+        {
+            //Initilizes the containers to 1.
+            UI_Map.InitializeUI_Grid_Containers(Grid_Load_Size);
+            UI_Map.InitlializeUI_Grid_Squares();
         }
 
         private void Initialize_CityGenerator_Form()
@@ -97,13 +95,16 @@ namespace Minecraft_Building_Generator
         private void comboBox_how_large_SelectedIndexChanged(object sender, EventArgs e)
         {
             //reset grids
-            if(GridPlanner_Map != null)
-                Redraw_Grid_Map(gridcontainerPanel, gridsquarePanel);
+            //if(UI_Map.UI_Grid_Container != null)
+               
 
             string selected = comboBox_how_large.SelectedItem.ToString();
             int selectedSize = int.Parse(selected);
 
-            int sizeOfBox = 169 * GridSize();
+            UI_Map.InitializeUI_Grid_Containers((int)Math.Sqrt(selectedSize));
+            UI_Map.InitlializeUI_Grid_Squares();
+
+            int sizeOfBox = 169 * UI_Map.GridSize;
             int TotalSize = sizeOfBox * sizeOfBox;
 
             dynamic_label_generated_size.Text = $"{sizeOfBox} x {sizeOfBox} = {TotalSize} blocks^2";
@@ -115,8 +116,8 @@ namespace Minecraft_Building_Generator
                 selectedSize);
 
             aMap.GenerateGrids();
-
-
+            Redraw_Grid_Map(gridcontainerPanel, gridsquarePanel);
+            
 
         }
 
@@ -144,10 +145,18 @@ namespace Minecraft_Building_Generator
          */
         private void panel_grid_planning_Paint(object sender, PaintEventArgs e)
         {
-            Draw_UI_Grid_Containers(GridSize());
+            Draw_UI_Grid_Containers();
 
             //initialization assumes 0,0.  this is okay because loading state method will fill GridPlanner_Map before a grid is painted.
-            Draw_UI_Grid_Squares(); 
+            if(selected_container != null)
+            {
+                Draw_UI_Grid_Squares(selected_container.UI_Grid_Planning_Squares);
+            }
+            else
+            {
+                Draw_UI_Grid_Squares(UI_Map.UI_Grid_Container[0,0].UI_Grid_Planning_Squares);
+            }
+            
         }
       
         private void panel_grid_square_planning_Paint(object sender, PaintEventArgs e)
@@ -168,53 +177,23 @@ namespace Minecraft_Building_Generator
         /// </summary>
         /// <param name="sizeOfGrid"></param>
         /// <param name="UI_Grid_Containers"></param>
-        private void Draw_UI_Grid_Containers(int sizeOfGrid)
+        private void Draw_UI_Grid_Containers()
         {
-            Console.WriteLine("initilize container");
-            //Grid_production
-            int separatorValue = 17;
-            int x = 10;
-            int y = 10;
-            int maxX = 1;
-            int maxY = 1;
-
-            //initialize 2d array of grid planner
-            GridPlanner_Map = new UI_Grid_Planning_Container[sizeOfGrid, sizeOfGrid];
-
-            for (int i = 0; i < sizeOfGrid; i++)
+            for (int i = 0; i < UI_Map.GridSize; i++)
             {
-                for (int j = 0; j < sizeOfGrid; j++)
-                {
-
-                    Rectangle _rect = new Rectangle(x, y, Shared_Constants.UI_GRID_RECTANGLE_SIZE, Shared_Constants.UI_GRID_RECTANGLE_SIZE);
-                    GridPlanner_Map[i, j] = new UI_Grid_Planning_Container(_rect);
-                    gridcontainerPanel.Fill_Rectangle(GridSquare_Zoning.Initialized, _rect);
-
-                    x += separatorValue;
+                for (int j = 0; j < UI_Map.GridSize; j++)
+                { 
+                    gridcontainerPanel.Fill_Rectangle(GridSquare_Zoning.Initialized, UI_Map.UI_Grid_Container[i,j].rect);
                 }
-                maxX = x;
-                maxY = y + separatorValue + 10;
-                x = 10;
-                y += separatorValue;
             }
 
-
-            UI_Container_draw_Direction_Max_X = maxX;
-            UI_Container_draw_Direction_Max_Y = maxY;
-
-            UI_Draw_Grid_Support(gridcontainerPanel, UI_Container_draw_Direction_Max_X, UI_Container_draw_Direction_Max_Y);
-
-
-            Point p1 = new Point(maxX + 5, 0);
-            UI_Draw_Grid_Support("East", gridcontainerPanel, p1);
-            Point p2 = new Point(0, maxY + 5);
-            UI_Draw_Grid_Support("South", gridcontainerPanel, p2);
+            UI_Draw_Grid_Support(gridcontainerPanel, UI_Map.EastAxisContainer_label.X, UI_Map.SouthAxisContainer_label.Y);
+            UI_Draw_Grid_Support("East", gridcontainerPanel, UI_Map.EastAxisContainer_label);
+            UI_Draw_Grid_Support("South", gridcontainerPanel, UI_Map.SouthAxisContainer_label);
 
             //initializes the first continer to be selected.
-            GridPlanner_Map[0, 0] = Set_Select_UI_Grid_Planning_Container(GridPlanner_Map[0, 0]);
-            selected_container = GridPlanner_Map[0, 0];
-
-
+            UI_Map.UI_Grid_Container[0, 0] = Set_Select_UI_Grid_Planning_Container(UI_Map.UI_Grid_Container[0, 0]);
+            selected_container = UI_Map.UI_Grid_Container[0, 0];
         }
 
 
@@ -224,15 +203,15 @@ namespace Minecraft_Building_Generator
         /// <param name="SizeOfGrid"></param>
         /// <param name="location"></param>
         /// <returns></returns>
-        private UI_Grid_Planning_Container Select_Rectangle_Container(int SizeOfGrid, Point location)
+        private UI_Grid_Planning_Container Select_Rectangle_Container(Point location)
         {
 
             UI_Grid_Planning_Container rectangle;
-            for (int i = 0; i < SizeOfGrid; i++)
+            for (int i = 0; i < UI_Map.GridSize; i++)
             {
-                for (int j = 0; j < SizeOfGrid; j++)
+                for (int j = 0; j < UI_Map.GridSize; j++)
                 {
-                    rectangle = GridPlanner_Map[i, j];
+                    rectangle = UI_Map.UI_Grid_Container[i, j];
 
                     if (rectangle.rect.Contains(location))
                     {
@@ -269,7 +248,7 @@ namespace Minecraft_Building_Generator
         private void panel_grid_planning_MouseClick(Object sender, MouseEventArgs e)
         {
 
-            UI_Grid_Planning_Container aContainer = Select_Rectangle_Container(GridSize(), e.Location);
+            UI_Grid_Planning_Container aContainer = Select_Rectangle_Container(e.Location);
             if (aContainer != null)
             {
                 selected_container = aContainer;
@@ -286,69 +265,25 @@ namespace Minecraft_Building_Generator
 
 
         /// <summary>
-        /// Initializes Grid squares in the UI Grid Map
+        /// Draws Grid squares in the UI Grid Map
         /// </summary>
-        private void Draw_UI_Grid_Squares()
+        private void Draw_UI_Grid_Squares(UI_Grid_Planning_Square[,] _uiGridSquares)
         {
-
-            UI_Grid_Planning_Container selected_container;
-            Console.WriteLine("initilize squares");
-            //Grid_production
-            int separatorValue = 17;
-            int x = 10;
-            int y = 10;
-            int maxX = 1;
-            int maxY = 1;
-
-            //initialize 2d array of grid planner
-
-            for (int i = 0; i < GridSize(); i++)
+            for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
             {
-                for (int j = 0; j < GridSize(); j++)
-                {
-                    selected_container = GridPlanner_Map[i, j];
-
-                    UI_Grid_Planning_Square[,] _uiGridSquares = new UI_Grid_Planning_Square[Shared_Constants.GRID_SQUARE_SIZE, Shared_Constants.GRID_SQUARE_SIZE];
-
-                    for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
-                    {
-                        for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
-                        {
-                            Rectangle _rect = new Rectangle(x, y, Shared_Constants.UI_GRID_RECTANGLE_SIZE, Shared_Constants.UI_GRID_RECTANGLE_SIZE);
-                            _uiGridSquares[m, n] = new UI_Grid_Planning_Square(_rect);
-                            if(i == 0 && j ==0)
-                                gridsquarePanel.Fill_Rectangle(GridSquare_Zoning.Initialized, _rect);
-
-                            x += separatorValue;
-                        }
-
-                        maxX = x;
-                        maxY = y + separatorValue + 10;
-                        x = 10;
-                        y += separatorValue;
-                    }
-                    selected_container.UI_Grid_Planning_Squares = _uiGridSquares;
-
-                    if (i == 0 && j == 0)
-                    {
-                        UI_squares_draw_Direction_Max_X = maxX;
-                        UI_squares_draw_Direction_Max_Y = maxY;
-
-                        UI_Draw_Grid_Support(gridsquarePanel, UI_squares_draw_Direction_Max_X, UI_squares_draw_Direction_Max_Y);
-
-                        Point p1 = new Point(maxX + 5, 0);
-                        UI_Draw_Grid_Support("East", gridsquarePanel, p1);
-                        Point p2 = new Point(0, maxY + 5);
-                        UI_Draw_Grid_Support("South", gridsquarePanel, p2);
-
-                    }
-                    x = 10;
-                    y = 10;
-                    maxX = 1;
-                    maxY = 1;
+                for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
+                {  
+                    gridsquarePanel.Fill_Rectangle(GridSquare_Zoning.Initialized, _uiGridSquares[m,n].rectangle);
                 }
             }
+
+            UI_Draw_Grid_Support(gridsquarePanel, UI_Map.EastAxisSquare_label.X, UI_Map.SouthAxisSquare_label.Y);
+            UI_Draw_Grid_Support("East", gridsquarePanel, UI_Map.EastAxisSquare_label);
+            UI_Draw_Grid_Support("South", gridsquarePanel, UI_Map.SouthAxisSquare_label);
+            gridsquarePanel.DrawSomething();
         }
+
+
 
         /// <summary>
         /// Action taken when a Grid_Square is clicked
@@ -372,7 +307,7 @@ namespace Minecraft_Building_Generator
         /// <returns>A <see cref="UI_Grid_Planning_Container"/> with the selected square in a 2D array of <see cref="UI_Grid_Planning_Square"/></returns>
         private UI_Grid_Planning_Container Select_Rectangle_Square(Object sender, MouseEventArgs e, UI_Grid_Planning_Container _container)
         {
-
+            //Console.WriteLine(""+_container.ContainerCoordinate.Item1+","+_container.ContainerCoordinate.Item2);
             UI_Grid_Planning_Square[,] _gridsquares = _container.UI_Grid_Planning_Squares;
 
             for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
@@ -383,7 +318,7 @@ namespace Minecraft_Building_Generator
 
                     if (square.rectangle.Contains(e.Location))
                     {
-
+                        //Console.WriteLine("" + square.SquareCoordinate.Item1 + "," + square.SquareCoordinate.Item2);
                         square = Set_Selected_UI_Grid_Planning_Square(square);
 
 
@@ -421,12 +356,9 @@ namespace Minecraft_Building_Generator
                 }
             }
 
-            UI_Draw_Grid_Support(gridsquarePanel, UI_squares_draw_Direction_Max_X, UI_squares_draw_Direction_Max_Y);
-
-            Point p1 = new Point(UI_squares_draw_Direction_Max_X + 5, 0);
-            UI_Draw_Grid_Support("East", gridsquarePanel, p1);
-            Point p2 = new Point(0, UI_squares_draw_Direction_Max_Y + 5);
-            UI_Draw_Grid_Support("South", gridsquarePanel, p2);
+            UI_Draw_Grid_Support(gridsquarePanel, UI_Map.EastAxisSquare_label.X, UI_Map.SouthAxisSquare_label.Y);
+            UI_Draw_Grid_Support("East", gridsquarePanel, UI_Map.EastAxisSquare_label);
+            UI_Draw_Grid_Support("South", gridsquarePanel, UI_Map.SouthAxisSquare_label);
  
         }
 
@@ -451,7 +383,7 @@ namespace Minecraft_Building_Generator
         private void Redraw_Grid_Map(UI_GridPanel containerPanel, UI_GridPanel squarePanel)
         {
 
-            Reset_Selected();
+            UI_Map.Reset_Selected();
             squarePanel.gridPanel.Refresh();
             containerPanel.gridPanel.Refresh();
             
@@ -460,48 +392,8 @@ namespace Minecraft_Building_Generator
             
         }
 
-        /// <summary>
-        /// This Method is used only during Redrawing when the size of the containers are changed.
-        /// </summary>
-        private void Reset_Selected()
-        {
-       
-            for (int i = 0; i < perviousSizeOfGrid; i++)
-            {
-                for (int j = 0; j < perviousSizeOfGrid; j++)
-                {
-
-                    UI_Grid_Planning_Container _UI_Container = GridPlanner_Map[i, j];
-                    _UI_Container.selected = false; //Resets the selected
 
 
-                    UI_Grid_Planning_Square[,] _UI_Squares = _UI_Container.UI_Grid_Planning_Squares;
-                    for (int k = 0; k < Shared_Constants.GRID_SQUARE_SIZE; k++)
-                    {
-                        for (int  m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
-                        {
-                            _UI_Squares[k, m].Selected = false; //resets the selected
-                        }
-                    }
-                }
-            }
-        }
-
-
-
-        /// <summary>
-        /// Obtains the size of UI_Grid_Containers based on the Combox box selection
-        /// </summary>
-        /// <returns>Size of Grid</returns>
-        private int GridSize()
-        {
-            
-            string selected = comboBox_how_large.SelectedItem.ToString();
-            int selectedSize = int.Parse(selected);
-            int sqrtSelected = (int)Math.Sqrt(selectedSize);
-            perviousSizeOfGrid = sqrtSelected;
-            return sqrtSelected;
-        }
 
 
         /// <summary>
@@ -560,6 +452,8 @@ namespace Minecraft_Building_Generator
             return selected_square;
         }
 
+
+
         /// <summary>
         /// Draws supporting grid outlines
         /// </summary>
@@ -612,15 +506,7 @@ namespace Minecraft_Building_Generator
             }
         }
 
-        /// <summary>
-        /// Calculates and then stores adjacency list of values based on container and gridsquare
-        /// </summary>
-        private void Initialized_UI_Grid_Adjacency()
-        {
-            /**when looping through the ui_grid_map, need to mark adjacency matrix with edges 
-             * an adjacent square must contain a 4 data points container location and square location, suggest creating custom class to handle these data points.  Adjacency_Compass class is a good name
-             */
-        }
+
 
     }
 }

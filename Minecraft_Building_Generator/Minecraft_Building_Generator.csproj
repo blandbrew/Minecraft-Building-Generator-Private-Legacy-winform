@@ -81,8 +81,9 @@
     <Compile Include="Structures\Infrustructure\Interfaces\IRoad.cs" />
     <Compile Include="Structures\Infrustructure\Roads.cs" />
     <Compile Include="Structures\Infrustructure\Subway.cs" />
+    <Compile Include="Grid_Classes\Adjacency_Compass.cs" />
+    <Compile Include="UI\UI_GridMap.cs" />
     <Compile Include="UI\UI_GridPanel.cs" />
-    <Compile Include="UI\UI_GridPanel_Container.cs" />
     <Compile Include="UI\UI_Grid_Planning_Square.cs" />
     <Compile Include="UI\UI_Grid_Planning_Container.cs" />
     <EmbeddedResource Include="mainform.resx">

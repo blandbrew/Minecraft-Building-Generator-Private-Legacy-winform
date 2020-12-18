@@ -386,11 +386,10 @@ namespace Minecraft_Building_Generator
 
         public double ContainerSize()
         {
-            double containerSize;
             if (number_of_Grid_Containers == 1)
-                return containerSize = 1;
+                return 1;
             else
-                return containerSize = Math.Sqrt(number_of_Grid_Containers);
+                return Math.Sqrt(number_of_Grid_Containers);
         }
     }
 }

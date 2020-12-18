@@ -35,188 +35,8 @@ namespace Minecraft_Building_Generator.UI
             gridPanelBrush = new SolidBrush(Color.Black);
             gridPanelPen = new Pen(Color.Black);
             gridPanelGraphics = gfx;
+            gridPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(gridPanel_MouseClick);
         }
-
-
-
-
-
-        ///// <summary>
-        ///// Draws the UI Grid for Containers and Contains All UI_Grid_Containers and associated grid squares
-        ///// </summary>
-        ///// <param name="sizeOfGrid"></param>
-        //public void Draw_UI_Grid(int sizeOfGrid, UI_Grid_Planning_Container[,] UI_Grid_Containers)
-        //{
-
-
-        //    //Grid_production
-        //    int separatorValue = 17;
-        //    int x = 10;
-        //    int y = 10;
-        //    int maxX = 1;
-        //    int maxY = 1;
-
-        //    //initialize 2d array of grid planner
-        //    UI_Grid_Containers = new UI_Grid_Planning_Container[sizeOfGrid, sizeOfGrid];
-
-        //    for (int i = 0; i < sizeOfGrid; i++)
-        //    {
-        //        gridPanelGraphics.FillRectangle(gridPanelBrush, x, y, 15, 15);
-
-        //        for (int j = 0; j < sizeOfGrid; j++)
-        //        {
-
-        //            Rectangle _rect = new Rectangle(x, y, 15, 15);
-        //            UI_Grid_Containers[i, j] = new UI_Grid_Planning_Container(_rect);
-        //            gridPanelGraphics.FillRectangle(brush_Initialized, _rect);
-
-        //            x += separatorValue;
-        //        }
-        //        maxX = x;
-        //        maxY = y + separatorValue + 10;
-        //        x = 10;
-        //        y += separatorValue;
-        //    }
-
-        //    gridPanelGraphics.DrawLine(gridPanelPen, 1, 0, maxX, 0); //Draws horizontal graph line
-        //    gridPanelGraphics.DrawLine(gridPanelPen, 1, 0, 1, maxY); //draws vertical graph line
-
-        //    Point p1 = new Point(maxX + 5, 0);
-        //    gridPanelGraphics.DrawString("East", gridPanelFont, gridPanelBrush, p1);
-
-        //    Point p2 = new Point(0, maxY + 5);
-        //    gridPanelGraphics.DrawString("South", gridPanelFont, gridPanelBrush, p2);
-
-        //    selectedUIRectangle = UI_Grid_Containers[0, 0];
-        //    selectedUIRectangle.selected = true;
-        //    gridPanelGraphics.FillRectangle(brush_Selected, selectedUIRectangle.rect);
-        //}
-
-
-        /// <summary>
-        /// Creates the Grid Panel layout for Grid Squares
-        /// </summary>
-
-        public void Initialize_UI_Grid(int sizeOfGrid, UI_Grid_Planning_Container[,] UI_Grid_Containers)
-        {
-            //gridPanelGraphics = gfx;
-
-            //Grid_production
-            int separatorValue = 17;
-            int x = 10;
-            int y = 10;
-            int maxX = 1;
-            int maxY = 1;
-
-            //initialize 2d array of grid planner
-
-            //aContainerOfSquares.UI_Grid_Planning_Squares = new UI_Grid_Planning_Square[Shared_Constants.GRID_SQUARE_SIZE, Shared_Constants.GRID_SQUARE_SIZE];
-
-            for (int i = 0; i < sizeOfGrid; i++)
-            {
-                for (int j = 0; j < sizeOfGrid; j++)
-                {
-                    gridPanelGraphics.FillRectangle(gridPanelBrush, x, y, 15, 15);
-                    UI_Grid_Planning_Square[,] _uiGridSquares = UI_Grid_Containers[i, j].UI_Grid_Planning_Squares;
-
-                    for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
-                    {
-                        for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
-                        {
-                            Rectangle _rect = new Rectangle(x, y, 15, 15);
-                            _uiGridSquares[m, n] = new UI_Grid_Planning_Square(_rect);
-                            gridPanelGraphics.FillRectangle(brush_Initialized, _rect);
-
-                            x += separatorValue;
-                        }
-
-                        maxX = x;
-                        maxY = y + separatorValue + 10;
-                        x = 10;
-                        y += separatorValue;
-                    }
-
-                }
-
-            }
-
-            gridPanelGraphics.DrawLine(gridPanelPen, 1, 0, maxX, 0); //Draws horizontal graph line
-            gridPanelGraphics.DrawLine(gridPanelPen, 1, 0, 1, maxY); //draws vertical graph line
-
-            Point p1 = new Point(maxX + 5, 0);
-            gridPanelGraphics.DrawString("East", gridPanelFont, gridPanelBrush, p1);
-
-            Point p2 = new Point(0, maxY + 5);
-            gridPanelGraphics.DrawString("South", gridPanelFont, gridPanelBrush, p2);
-
-        }
-
-
-
-        ///// <summary>
-        ///// Intalizes UI Grid Squares
-        ///// </summary>
-        ///// <param name="UI_Grid_Container"></param>
-        ///// <param name="gfx"></param>
-        //public void Initialize_UI_Grid(UI_Grid_Planning_Container UI_Grid_Container, Graphics gfx)
-        //{
-        //    gridPanelGraphics = gfx;
-        //    bool squareSelected = false;
-
-        //    //Grid_production
-        //    int separatorValue = 17;
-        //    int x = 10;
-        //    int y = 10;
-        //    int maxX = 1;
-        //    int maxY = 1;
-
-        //    gridPanelGraphics.FillRectangle(gridPanelBrush, x, y, 15, 15);
-        //    UI_Grid_Planning_Square[,] _uiGridSquares = UI_Grid_Container.UI_Grid_Planning_Squares;
-
-        //    for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
-        //    {
-        //        for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
-        //        {
-        //            if (_uiGridSquares[m, n].Selected)//or may need null test
-        //            {
-        //                Rectangle _rect = new Rectangle(x, y, 15, 15);
-        //                gridPanelGraphics.FillRectangle(brush_Selected, _rect);
-        //                squareSelected = true;
-        //            }
-        //            else
-        //            {
-        //                Rectangle _rect = new Rectangle(x, y, 15, 15);
-        //                _uiGridSquares[m, n] = new UI_Grid_Planning_Square(_rect);
-        //                gridPanelGraphics.FillRectangle(brush_Initialized, _rect);
-        //            }
-
-
-        //            x += separatorValue;
-        //        }
-
-        //        maxX = x;
-        //        maxY = y + separatorValue + 10;
-        //        x = 10;
-        //        y += separatorValue;
-        //    }
-
-        //    gridPanelGraphics.DrawLine(gridPanelPen, 1, 0, maxX, 0); //Draws horizontal graph line
-        //    gridPanelGraphics.DrawLine(gridPanelPen, 1, 0, 1, maxY); //draws vertical graph line
-
-        //    Point p1 = new Point(maxX + 5, 0);
-        //    gridPanelGraphics.DrawString("East", gridPanelFont, gridPanelBrush, p1);
-
-        //    Point p2 = new Point(0, maxY + 5);
-        //    gridPanelGraphics.DrawString("South", gridPanelFont, gridPanelBrush, p2);
-
-        //    if (!squareSelected)
-        //    {
-        //        _uiGridSquares[0, 0].Selected = true;
-
-        //        gridPanelGraphics.FillRectangle(brush_Selected, selectedUIRectangle.rect);
-        //    }
-
-        //}
 
 
         public void Fill_Rectangle(GridSquare_Zoning fillType, Rectangle rect)
@@ -248,43 +68,23 @@ namespace Minecraft_Building_Generator.UI
             }
         }
 
-
-
-
-
-
-        public void UI_Grid_Square_MouseClickEvents(Object sender, MouseEventArgs e, UI_Grid_Planning_Container selectedContainer)
+        public void DrawSomething()
         {
+            Fill_Rectangle(GridSquare_Zoning.Initialized, new Rectangle(8,4,30,30));
 
-
-            //UI_Grid_Planning_Container rectangle;
-            //for (int i = 0; i < SizeOfGrid; i++)
-            //{
-            //    for (int j = 0; j < SizeOfGrid; j++)
-            //    {
-            //        rectangle = gridPlanner_Container[i, j];
-
-            //        if (rectangle.rect.Contains(e.Location))
-            //        {
-            //            if (rectangle.selected)
-            //            {
-            //                Console.WriteLine("selected already");
-            //                gridPanelGraphics.FillRectangle(brush_Initialized, rectangle.rect);
-            //                rectangle.selected = false;
-            //            }
-            //            else
-            //            {
-            //                Console.WriteLine("not selected");
-            //                gridPanelGraphics.FillRectangle(brush_Selected, rectangle.rect);
-            //                rectangle.selected = true;
-            //            }
-
-            //        }
-            //    }
-
-            //}
-
+            //gridPanel.Clic
+                //gridPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(gridPanel_MouseClick);
         }
+
+        public void gridPanel_MouseClick(object sender, EventArgs e)
+        {
+            Console.WriteLine("MOUSE CLICKIN");
+        }
+
+
+
+
+ 
 
     }
 }

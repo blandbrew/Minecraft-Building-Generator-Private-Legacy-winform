@@ -495,7 +495,6 @@ namespace Minecraft_Building_Generator
             this.radioButton_water.Name = "radioButton_water";
             this.radioButton_water.Size = new System.Drawing.Size(84, 17);
             this.radioButton_water.TabIndex = 6;
-            this.radioButton_water.TabStop = true;
             this.radioButton_water.Text = "Water (Blue)";
             this.radioButton_water.UseVisualStyleBackColor = true;
             this.radioButton_water.CheckedChanged += new System.EventHandler(this.AllRadioButtons_CheckedChanged);
@@ -508,7 +507,6 @@ namespace Minecraft_Building_Generator
             this.radioButton_scenery.Name = "radioButton_scenery";
             this.radioButton_scenery.Size = new System.Drawing.Size(102, 17);
             this.radioButton_scenery.TabIndex = 5;
-            this.radioButton_scenery.TabStop = true;
             this.radioButton_scenery.Text = "Scenery (Green)";
             this.radioButton_scenery.UseVisualStyleBackColor = true;
             this.radioButton_scenery.CheckedChanged += new System.EventHandler(this.AllRadioButtons_CheckedChanged);
@@ -521,7 +519,6 @@ namespace Minecraft_Building_Generator
             this.radioButton_road.Name = "radioButton_road";
             this.radioButton_road.Size = new System.Drawing.Size(87, 17);
             this.radioButton_road.TabIndex = 4;
-            this.radioButton_road.TabStop = true;
             this.radioButton_road.Text = "Road (Black)";
             this.radioButton_road.UseVisualStyleBackColor = true;
             this.radioButton_road.CheckedChanged += new System.EventHandler(this.AllRadioButtons_CheckedChanged);
@@ -529,6 +526,7 @@ namespace Minecraft_Building_Generator
             // radioButton_building
             // 
             this.radioButton_building.AutoSize = true;
+            this.radioButton_building.Checked = true;
             this.radioButton_building.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton_building.Location = new System.Drawing.Point(291, 302);
             this.radioButton_building.Name = "radioButton_building";
