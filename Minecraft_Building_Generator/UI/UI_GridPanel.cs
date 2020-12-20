@@ -23,6 +23,8 @@ namespace Minecraft_Building_Generator.UI
         private SolidBrush brush_Water = new SolidBrush(Color.Blue);
         private SolidBrush brush_None = new SolidBrush(Color.Purple);
 
+        public int GraphMax_X { get; set; }
+        public int GraphMax_Y { get; set; }
 
         /// <summary>
         /// Creates a new Grid Panel for tracking grid changes
@@ -35,7 +37,7 @@ namespace Minecraft_Building_Generator.UI
             gridPanelBrush = new SolidBrush(Color.Black);
             gridPanelPen = new Pen(Color.Black);
             gridPanelGraphics = gfx;
-            gridPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(gridPanel_MouseClick);
+            
         }
 
 
@@ -68,23 +70,57 @@ namespace Minecraft_Building_Generator.UI
             }
         }
 
-        public void DrawSomething()
+        public void DrawAxis()
         {
-            Fill_Rectangle(GridSquare_Zoning.Initialized, new Rectangle(8,4,30,30));
-
-            //gridPanel.Clic
-                //gridPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(gridPanel_MouseClick);
-        }
-
-        public void gridPanel_MouseClick(object sender, EventArgs e)
-        {
-            Console.WriteLine("MOUSE CLICKIN");
+            gridPanelGraphics.DrawLine(gridPanelPen, 1, 0, GraphMax_X, 0); //Draws horizontal graph line
+            gridPanelGraphics.DrawLine(gridPanelPen, 1, 0, 1, GraphMax_Y); //draws vertical graph line
         }
 
 
+        /// <summary>
+        /// Draw a string at a specific point
+        /// </summary>
+        /// <param name="direction"></param>
+        public void DrawAxisLabel(string text, Point p1)
+        {
+            gridPanelGraphics.DrawString(text, gridPanelFont, gridPanelBrush, p1);
+          
+        }
+
+        /// <summary>
+        /// Draws the default axis labels for East and South
+        /// </summary>
+        public void DrawAxisLabel()
+        {
+            gridPanelGraphics.DrawString("East", gridPanelFont, gridPanelBrush, new Point(GraphMax_X, 0));
+            gridPanelGraphics.DrawString("South", gridPanelFont, gridPanelBrush, new Point(0, GraphMax_Y));
+        }
 
 
- 
+
+
+
+
+
+
+
+        //public void DrawSomething()
+        //{
+        //    Fill_Rectangle(GridSquare_Zoning.Initialized, new Rectangle(8,4,30,30));
+
+        //    //gridPanel.Clic
+        //        //gridPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(gridPanel_MouseClick);
+        //}
+
+        //public void gridPanel_MouseClick(object sender, EventArgs e)
+        //{
+        //    Console.WriteLine("MOUSE CLICKIN");
+        //}
+
+
+
+
+
 
     }
 }

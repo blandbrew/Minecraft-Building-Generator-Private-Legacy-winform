@@ -13,6 +13,7 @@ namespace Minecraft_Building_Generator.UI
         public (int, int) ContainerCoordinate { get; private set; }
 
         public bool selected { get; set; } = false;
+        public bool previously_selected { get; set; } = false;
         public GridSquare_Zoning zone { get; set; }
 
         public UI_Grid_Planning_Square[,] UI_Grid_Planning_Squares { get; set; }

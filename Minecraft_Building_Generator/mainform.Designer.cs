@@ -60,6 +60,8 @@ namespace Minecraft_Building_Generator
             this.label_tab_minecraftversion = new System.Windows.Forms.Label();
             this.tabpage_grid_planning = new System.Windows.Forms.TabPage();
             this.panel_grid_planning = new System.Windows.Forms.Panel();
+            this.dynamic_label_selected_container = new System.Windows.Forms.Label();
+            this.label_selected_container = new System.Windows.Forms.Label();
             this.menustrip_mainform = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,8 +81,10 @@ namespace Minecraft_Building_Generator
             this.groupbox_coordinates.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_behaviorpack.SuspendLayout();
+            this.panel_grid_planning.SuspendLayout();
             this.menustrip_mainform.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel_grid_square_planning.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupbox_coordinates
@@ -390,12 +394,34 @@ namespace Minecraft_Building_Generator
             // 
             // panel_grid_planning
             // 
+            this.panel_grid_planning.Controls.Add(this.dynamic_label_selected_container);
+            this.panel_grid_planning.Controls.Add(this.label_selected_container);
             this.panel_grid_planning.Location = new System.Drawing.Point(6, 28);
             this.panel_grid_planning.Name = "panel_grid_planning";
-            this.panel_grid_planning.Size = new System.Drawing.Size(279, 302);
+            this.panel_grid_planning.Size = new System.Drawing.Size(279, 335);
             this.panel_grid_planning.TabIndex = 0;
             this.panel_grid_planning.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_grid_planning_Paint);
             this.panel_grid_planning.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel_grid_planning_MouseClick);
+
+            // 
+            // dynamic_label_selected_container
+            // 
+            this.dynamic_label_selected_container.AutoSize = true;
+            this.dynamic_label_selected_container.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dynamic_label_selected_container.Location = new System.Drawing.Point(144, 274);
+            this.dynamic_label_selected_container.Name = "dynamic_label_selected_container";
+            this.dynamic_label_selected_container.Size = new System.Drawing.Size(0, 16);
+            this.dynamic_label_selected_container.TabIndex = 1;
+            // 
+            // label_selected_container
+            // 
+            this.label_selected_container.AutoSize = true;
+            this.label_selected_container.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_selected_container.Location = new System.Drawing.Point(13, 274);
+            this.label_selected_container.Name = "label_selected_container";
+            this.label_selected_container.Size = new System.Drawing.Size(125, 16);
+            this.label_selected_container.TabIndex = 0;
+            this.label_selected_container.Text = "Selected Container:";
             // 
             // menustrip_mainform
             // 
@@ -473,10 +499,6 @@ namespace Minecraft_Building_Generator
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton_water);
-            this.groupBox1.Controls.Add(this.radioButton_scenery);
-            this.groupBox1.Controls.Add(this.radioButton_road);
-            this.groupBox1.Controls.Add(this.radioButton_building);
             this.groupBox1.Controls.Add(this.panel_grid_square_planning);
             this.groupBox1.Controls.Add(this.panel_grid_planning);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -491,7 +513,7 @@ namespace Minecraft_Building_Generator
             // 
             this.radioButton_water.AutoSize = true;
             this.radioButton_water.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_water.Location = new System.Drawing.Point(476, 302);
+            this.radioButton_water.Location = new System.Drawing.Point(119, 310);
             this.radioButton_water.Name = "radioButton_water";
             this.radioButton_water.Size = new System.Drawing.Size(84, 17);
             this.radioButton_water.TabIndex = 6;
@@ -503,7 +525,7 @@ namespace Minecraft_Building_Generator
             // 
             this.radioButton_scenery.AutoSize = true;
             this.radioButton_scenery.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_scenery.Location = new System.Drawing.Point(291, 325);
+            this.radioButton_scenery.Location = new System.Drawing.Point(11, 310);
             this.radioButton_scenery.Name = "radioButton_scenery";
             this.radioButton_scenery.Size = new System.Drawing.Size(102, 17);
             this.radioButton_scenery.TabIndex = 5;
@@ -515,7 +537,7 @@ namespace Minecraft_Building_Generator
             // 
             this.radioButton_road.AutoSize = true;
             this.radioButton_road.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_road.Location = new System.Drawing.Point(387, 302);
+            this.radioButton_road.Location = new System.Drawing.Point(119, 287);
             this.radioButton_road.Name = "radioButton_road";
             this.radioButton_road.Size = new System.Drawing.Size(87, 17);
             this.radioButton_road.TabIndex = 4;
@@ -528,7 +550,7 @@ namespace Minecraft_Building_Generator
             this.radioButton_building.AutoSize = true;
             this.radioButton_building.Checked = true;
             this.radioButton_building.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_building.Location = new System.Drawing.Point(291, 302);
+            this.radioButton_building.Location = new System.Drawing.Point(11, 287);
             this.radioButton_building.Name = "radioButton_building";
             this.radioButton_building.Size = new System.Drawing.Size(90, 17);
             this.radioButton_building.TabIndex = 3;
@@ -539,12 +561,17 @@ namespace Minecraft_Building_Generator
             // 
             // panel_grid_square_planning
             // 
+            this.panel_grid_square_planning.Controls.Add(this.radioButton_water);
+            this.panel_grid_square_planning.Controls.Add(this.radioButton_road);
+            this.panel_grid_square_planning.Controls.Add(this.radioButton_scenery);
+            this.panel_grid_square_planning.Controls.Add(this.radioButton_building);
             this.panel_grid_square_planning.Location = new System.Drawing.Point(291, 28);
             this.panel_grid_square_planning.Name = "panel_grid_square_planning";
-            this.panel_grid_square_planning.Size = new System.Drawing.Size(273, 271);
+            this.panel_grid_square_planning.Size = new System.Drawing.Size(273, 335);
             this.panel_grid_square_planning.TabIndex = 1;
             this.panel_grid_square_planning.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_grid_square_planning_Paint);
             this.panel_grid_square_planning.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseClick);
+
             // 
             // mainform
             // 
@@ -570,10 +597,13 @@ namespace Minecraft_Building_Generator
             this.tabControl1.ResumeLayout(false);
             this.tab_behaviorpack.ResumeLayout(false);
             this.tab_behaviorpack.PerformLayout();
+            this.panel_grid_planning.ResumeLayout(false);
+            this.panel_grid_planning.PerformLayout();
             this.menustrip_mainform.ResumeLayout(false);
             this.menustrip_mainform.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.panel_grid_square_planning.ResumeLayout(false);
+            this.panel_grid_square_planning.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -626,6 +656,8 @@ namespace Minecraft_Building_Generator
         private System.Windows.Forms.RadioButton radioButton_scenery;
         private System.Windows.Forms.RadioButton radioButton_road;
         private System.Windows.Forms.RadioButton radioButton_water;
+        private System.Windows.Forms.Label dynamic_label_selected_container;
+        private System.Windows.Forms.Label label_selected_container;
     }
 }
 
