@@ -30,12 +30,9 @@ namespace Minecraft_Building_Generator.UI
         {
             rect = rectangle;
             ContainerCoordinate = containerCoord;
+            AdjacentContainers = new List<UI_Grid_Planning_Container>();
         }
 
-        private void SetAdjacency()
-        {
-
-        }
 
 
 

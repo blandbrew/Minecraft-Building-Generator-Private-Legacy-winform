@@ -17,7 +17,7 @@ namespace Minecraft_Building_Generator.UI
         public GridSquare_Zoning zone { get; set; }
 
         public List<UI_Grid_Planning_Square> AdjacentSquares { get; set; }
-
+        
         public int clicks;
 
         public UI_Grid_Planning_Square(Rectangle rect, (int, int) ContainerCoord, (int, int) SquareCoord)
@@ -25,6 +25,8 @@ namespace Minecraft_Building_Generator.UI
             rectangle = rect;
             ParentContainerCoordinate = ContainerCoord;
             SquareCoordinate = SquareCoord;
+            AdjacentSquares = new List<UI_Grid_Planning_Square>();
+            
         }
 
 

@@ -12,16 +12,12 @@ namespace Minecraft_Building_Generator.UI
     {
 
         public UI_Grid_Planning_Container[,] UI_Grid_Container { get; set; }
-        public Point EastAxisContainer_label { get; private set; }
-        public Point SouthAxisContainer_label { get; private set; }
-        public Point EastAxisSquare_label { get; private set; }
-        public Point SouthAxisSquare_label { get; private set; }
 
         public int GridSize { get; set; }
         public int previousSizeOfGrid { get; set; }
 
         private UI_Grid_Planning_Container previouslySelected_container { get; set; }
-
+        private UI_Grid_Planning_Container selected_container { get; set; }
 
 
 
@@ -35,15 +31,37 @@ namespace Minecraft_Building_Generator.UI
 
         public UI_Grid_Planning_Container GetContainer((int, int) container_location)
         {
-            return UI_Grid_Container[container_location.Item1, container_location.Item2];
+            if (UI_Grid_Container[container_location.Item1, container_location.Item2] != null)
+               return UI_Grid_Container[container_location.Item1, container_location.Item2];
+            else
+                return null;
+ 
         }
 
         public UI_Grid_Planning_Square GetSquareFromContainer((int, int) container_location, (int, int) square_location)
         {
-            return UI_Grid_Container[container_location.Item1, container_location.Item2].UI_Grid_Planning_Squares[square_location.Item1, square_location.Item2];
+            if (UI_Grid_Container[container_location.Item1, container_location.Item2].UI_Grid_Planning_Squares[square_location.Item1, square_location.Item2] != null)
+                return UI_Grid_Container[container_location.Item1, container_location.Item2].UI_Grid_Planning_Squares[square_location.Item1, square_location.Item2];
+            else
+                return null;
+        }
+
+        public void setCointainer((int,int) container_location, UI_Grid_Planning_Container aContainer)
+        {
+            if(UI_Grid_Container[container_location.Item1, container_location.Item2] != null)
+                UI_Grid_Container[container_location.Item1, container_location.Item2] = aContainer;
+     
         }
 
 
+
+
+
+        /****************************************************************************
+         * Initialize UI Grid Section
+         *****************************************************************************
+         *****************************************************************************
+         *****************************************************************************/
 
 
         public void InitializeUI_Grid_Containers(int sizeOfGrid, UI_GridPanel containerPanel)
@@ -80,8 +98,6 @@ namespace Minecraft_Building_Generator.UI
 
             containerPanel.GraphMax_X = maxX;
             containerPanel.GraphMax_Y = maxY;
-            //EastAxisContainer_label = new Point(maxX + 5, 0);
-            //SouthAxisContainer_label = new Point(0, maxY + 5);
 
         }
 
@@ -141,7 +157,25 @@ namespace Minecraft_Building_Generator.UI
                     maxY = 1;
                 }
             }
+
+            AdjacenctContainerCalculation();
+            AdjacenctSquaresCalculation();
         }
+
+
+        /*END OF INITILIZATION*/
+        //****************************************************************************
+
+
+
+
+
+        /****************************************************************************
+        * ON MOUSE CLICK - Select Handlers
+        *****************************************************************************
+        *****************************************************************************
+        *****************************************************************************/
+
 
 
 
@@ -177,10 +211,46 @@ namespace Minecraft_Building_Generator.UI
         }
 
 
+        public void Select_Rectangle_Square(Object sender, Point click_location, UI_Grid_Planning_Container _container, UI_GridPanel clickedPanel, GridSquare_Zoning selected_radioButton_gridzone)
+        {
+            //Console.WriteLine(""+_container.ContainerCoordinate.Item1+","+_container.ContainerCoordinate.Item2);
+            UI_Grid_Planning_Square[,] _gridsquares = _container.UI_Grid_Planning_Squares;
+
+            for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
+            {
+                for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
+                {
+                    UI_Grid_Planning_Square square = _gridsquares[m, n];
+
+                    if (square.rectangle.Contains(click_location))
+                    {
+                        //Console.WriteLine("" + square.SquareCoordinate.Item1 + "," + square.SquareCoordinate.Item2);
+                        square = Set_Selected_UI_Grid_Planning_Square(square, clickedPanel, selected_radioButton_gridzone);
+
+                        setCointainer((_container.ContainerCoordinate.Item1, _container.ContainerCoordinate.Item2), _container);
+                    }
+                }
+
+            }
+      
+        }
+
+
+
+        /*END OF Click Handlers*/
+        //****************************************************************************
 
 
 
 
+
+
+
+        /****************************************************************************
+        * DRAW METHOD Calls to UI_GridPanel
+        *****************************************************************************
+        *****************************************************************************
+        *****************************************************************************/
 
         public UI_Grid_Planning_Container Draw_UI_Grid_Containers(UI_GridPanel gridcontainerPanel)
         {
@@ -201,15 +271,32 @@ namespace Minecraft_Building_Generator.UI
             return UI_Grid_Container[0, 0];
         }
 
+        public void Draw_UI_Grid_Squares(UI_Grid_Planning_Square[,] _uiGridSquares, UI_GridPanel gridSquarePanel)
+        {
+            for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
+            {
+                for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
+                {
+                    gridSquarePanel.Fill_Rectangle(GridSquare_Zoning.Initialized, _uiGridSquares[m, n].rectangle);
+                }
+            }
+
+            gridSquarePanel.DrawAxis();
+            gridSquarePanel.DrawAxisLabel();
+
+        }
+        /*END OF Draw Methods*/
+        //****************************************************************************
 
 
 
 
 
-
-
-
-
+        /****************************************************************************
+        * Handles Selection settings
+        *****************************************************************************
+        *****************************************************************************
+        *****************************************************************************/
 
 
         private UI_Grid_Planning_Container Set_Select_UI_Grid_Planning_Container(UI_Grid_Planning_Container selected_container, UI_GridPanel clickedPanel)
@@ -239,33 +326,6 @@ namespace Minecraft_Building_Generator.UI
             return selected_container;
         }
 
-
-
-        public void Select_Rectangle_Square(Object sender, Point click_location, UI_Grid_Planning_Container _container, UI_GridPanel clickedPanel, GridSquare_Zoning selected_radioButton_gridzone)
-        {
-            //Console.WriteLine(""+_container.ContainerCoordinate.Item1+","+_container.ContainerCoordinate.Item2);
-            UI_Grid_Planning_Square[,] _gridsquares = _container.UI_Grid_Planning_Squares;
-
-            for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
-            {
-                for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
-                {
-                    UI_Grid_Planning_Square square = _gridsquares[m, n];
-
-                    if (square.rectangle.Contains(click_location))
-                    {
-                        //Console.WriteLine("" + square.SquareCoordinate.Item1 + "," + square.SquareCoordinate.Item2);
-                        square = Set_Selected_UI_Grid_Planning_Square(square, clickedPanel, selected_radioButton_gridzone);
-
-
-                        //return _container;
-                    }
-                }
-
-            }
-            //return null;
-        }
-
         private UI_Grid_Planning_Square Set_Selected_UI_Grid_Planning_Square(UI_Grid_Planning_Square selected_square, UI_GridPanel clickedPanel, GridSquare_Zoning selected_radioButton_gridzone)
         {
             if (selected_square.Selected)
@@ -279,31 +339,31 @@ namespace Minecraft_Building_Generator.UI
                 //Radio button determines what color to fill in the square
                 selected_square.Selected = true;
                 clickedPanel.Fill_Rectangle(selected_radioButton_gridzone, selected_square.rectangle);
-                //selected_square.zone = selected_radioButton_gridzone;
+                selected_square.zone = selected_radioButton_gridzone;
             }
 
             return selected_square;
         }
 
 
-
-        public void Draw_UI_Grid_Squares(UI_Grid_Planning_Square[,] _uiGridSquares, UI_GridPanel gridSquarePanel)
-        {
-            for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
-            {
-                for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
-                {
-                    gridSquarePanel.Fill_Rectangle(GridSquare_Zoning.Initialized, _uiGridSquares[m, n].rectangle);
-                }
-            }
-
-            gridSquarePanel.DrawAxis();
-            gridSquarePanel.DrawAxisLabel();
-
-        }
+        /*END OF Selection Handlers*/
+        //****************************************************************************
 
 
 
+
+        /****************************************************************************
+        * Utility Methods
+        *****************************************************************************
+        *****************************************************************************
+        *****************************************************************************/
+
+
+        /// <summary>
+        /// Loads Grid squares when a container square is clicked.
+        /// </summary>
+        /// <param name="selected_container"></param>
+        /// <param name="gridSquarePanel"></param>
         public void Load_Grid_Squares(UI_Grid_Planning_Container selected_container, UI_GridPanel gridSquarePanel)
         {
             UI_Grid_Planning_Square[,] squares = selected_container.UI_Grid_Planning_Squares;
@@ -314,6 +374,7 @@ namespace Minecraft_Building_Generator.UI
                 {
                     if (squares[m, n].Selected)
                     {
+                        Console.WriteLine("SELECTED SQUARES " + squares[m, n].zone.ToString());
                         gridSquarePanel.Fill_Rectangle(squares[m, n].zone, squares[m, n].rectangle);
                     }
                     else
@@ -329,7 +390,9 @@ namespace Minecraft_Building_Generator.UI
         }
 
 
-
+        /// <summary>
+        /// Resets all of the grid containers and grid squares back to initilized and unselected
+        /// </summary>
         public void Reset_Selected()
         {
 
@@ -354,5 +417,181 @@ namespace Minecraft_Building_Generator.UI
             }
         }
 
-    }
+
+        /// <summary>
+        /// Calculates the Adjacent Containers and adds them to the list
+        /// </summary>
+        private void AdjacenctContainerCalculation()
+        {
+           
+            for (int i = 0; i < GridSize; i++)
+            {
+                for (int j = 0; j < GridSize; j++)
+                {
+                    UI_Grid_Planning_Container aContainer = UI_Grid_Container[i, j];
+
+                    //Console.WriteLine(UI_Grid_Container[i, j+1].ContainerCoordinate);
+                    //This section is to test for adjacency and then associate the adjacent unit.
+                    //Minecraft only has to test 4 directions since we are not considering diagnal adjacency
+                         //before
+                        if (j - 1 >= 0 && UI_Grid_Container[i, j - 1] != null)
+                        {
+                            
+                            aContainer.AdjacentContainers.Add(UI_Grid_Container[i, j - 1]);
+                        }
+                        //next
+                        if ((j + 1 < GridSize) && UI_Grid_Container[i, j + 1] != null)
+                        {
+                        Console.WriteLine("ADDED CONTAINER");
+                            aContainer.AdjacentContainers.Add(UI_Grid_Container[i, j + 1]);
+                        }
+                        //above
+                        if ((i + 1 < GridSize) && UI_Grid_Container[i + 1, j] != null)
+                        {
+                       
+                            aContainer.AdjacentContainers.Add(UI_Grid_Container[i + 1, j]);
+                        }
+                        //below
+                        if ((i - 1 >= 0) && UI_Grid_Container[i - 1, j] != null)
+                        {
+                    
+                            aContainer.AdjacentContainers.Add(UI_Grid_Container[i - 1, j]);
+                        }
+
+                }
+            }
+        }
+
+        private void AdjacenctSquaresCalculation()
+        {
+            for (int i = 0; i < GridSize; i++)
+            {
+                for (int j = 0; j < GridSize; j++)
+                {
+                    UI_Grid_Planning_Container aContainer = UI_Grid_Container[i, j];
+                    UI_Grid_Planning_Square[,] aGridSquareMap = aContainer.UI_Grid_Planning_Squares;
+
+
+                    for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
+                    {
+                        for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
+                        {
+
+                            UI_Grid_Planning_Square aGridSquare = aGridSquareMap[m, n];
+                         
+                            try
+                            {
+                                //left
+                                if ((n - 1 >= 0) && aGridSquareMap[m, n - 1] != null)
+                                {
+                                    aGridSquare.AdjacentSquares.Add(aGridSquareMap[m, n - 1]);
+                                }
+                                //right
+                                if ((n + 1 < Shared_Constants.GRID_SQUARE_SIZE) && aGridSquareMap[m, n + 1] != null)
+                                {
+                                    
+                                    aGridSquare.AdjacentSquares.Add(aGridSquareMap[m, n + 1]);
+                                }
+                                //below
+                                if ((m + 1 < Shared_Constants.GRID_SQUARE_SIZE) && aGridSquareMap[m + 1, n] != null)
+                                {
+                                    aGridSquare.AdjacentSquares.Add(aGridSquareMap[m + 1, n]);
+                                }
+                                //above
+                                if ((m - 1 >= 0) && aGridSquareMap[m - 1, n] != null)
+                                {
+                                    aGridSquare.AdjacentSquares.Add(aGridSquareMap[m - 1, n]);
+                                }
+
+                                (bool, string) edgeResult = EdgeTest(i, j, m, n);
+
+                                if (edgeResult.Item1)
+                                    GetAdjacentSquareFromAnotherContainer(aGridSquare, edgeResult.Item2);
+
+
+                            }
+                            catch (IndexOutOfRangeException err)
+                            {
+                                Console.WriteLine(err);
+                            }
+
+                        }
+
+                    }
+
+                }
+            }
+        
+        }
+
+        private (bool, string) EdgeTest(int i, int j, int m, int n)
+        {
+            //not working because of the limits imposed by i != 0, what happens if i does equal zero....
+            if (m == 0 && i-1 >= 0)
+                return (true, "north");
+            else if (m == 12 && i+1 <= 12)
+                return (true, "south");
+            else if (n == 0 && j-1 >= 0)
+                return (true, "West");
+            else if (n == 12 && j <= 12)
+                return (true, "East");
+
+            return (false, "none");
+        }
+
+        private void GetAdjacentSquareFromAnotherContainer(UI_Grid_Planning_Square current_square, string direction)
+        {
+            //UI_Grid_Planning_Square adjacentsquare;
+            int row;
+            int col;
+            (int, int) adjSquareCoordinate = current_square.SquareCoordinate;
+            
+
+            switch(direction)
+            {
+                case "north":
+                    row = -1;
+                    col = 0;
+                    adjSquareCoordinate.Item1 = 12;
+                    break;
+                case "east":
+                    row = 0;
+                    col = 1;
+                    adjSquareCoordinate.Item2 = 0;
+                    break;
+                case "south":
+                    row = 1;
+                    col = 0;
+                    adjSquareCoordinate.Item1 = 0;
+                    break;
+                case "west":
+                    row = 0;
+                    col = -1;
+                    adjSquareCoordinate.Item2 = 12;
+                    break;
+                default:
+                    return;
+            }
+
+            (int, int) parentContainer = current_square.ParentContainerCoordinate;
+
+            //get a container that is above this container
+            UI_Grid_Planning_Container adjContainer = GetContainer((parentContainer.Item1 + row, parentContainer.Item2 + col));
+            UI_Grid_Planning_Square adjSquare = adjContainer.UI_Grid_Planning_Squares[adjSquareCoordinate.Item1, adjSquareCoordinate.Item2];
+
+            //current grid square, need to know adjacnet one in another container
+            //aGridSquare
+            Console.WriteLine("Parent square: " + current_square.SquareCoordinate);
+            Console.WriteLine("adjcent square: " + adjSquare.SquareCoordinate);
+            current_square.AdjacentSquares.Add(adjSquare);
+            adjSquare.AdjacentSquares.Add(current_square);
+
+
+
+
+        }
+            
+
+
+       }
 }
