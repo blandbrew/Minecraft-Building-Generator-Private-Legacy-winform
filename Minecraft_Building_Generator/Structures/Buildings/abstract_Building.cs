@@ -20,7 +20,7 @@ namespace Minecraft_Building_Generator.Structures
         //Building Description
         protected int NumberOfFloors { get; set; }
         protected int Height { get; set; }
-        protected int Width { get; set; } = 13;
+        protected int Width { get; set; } = 12;
         protected int SpaceBetweenFloors { get; set; } = 4;
 
         protected BuildingClass building_Class;

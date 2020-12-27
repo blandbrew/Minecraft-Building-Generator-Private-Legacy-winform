@@ -35,10 +35,10 @@ namespace Minecraft_Building_Generator.Structures
         {
 
             
-            Coordinate endPoint = new Coordinate(startingPoint.x + Width-3, startingPoint.y + Height, startingPoint.z + Width-3);
+            Coordinate endPoint = new Coordinate(startingPoint.x + Width, startingPoint.y + Height, startingPoint.z + Width);
 
             //adds hollow command
-            Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y} {startingPoint.z} {endPoint.x} {endPoint.y} {endPoint.z} glass 1 hollow");
+            Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y+Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y} {endPoint.z} glass 1 hollow");
 
             //throw new NotImplementedException();
         }
@@ -48,9 +48,10 @@ namespace Minecraft_Building_Generator.Structures
             NumberOfFloors = Height / 4; //adds an additional floor onto the building height...may need to reconsider this
             for (int i = 0; i < NumberOfFloors; i++)
             {
-                
-                Coordinate endPoint = new Coordinate(startingPoint.x + Width - 3, startingPoint.y + 4, startingPoint.z + Width - 3);
+
+                Coordinate endPoint = new Coordinate(startingPoint.x + Width, startingPoint.y, startingPoint.z + Width );
                 startingPoint.y += 4;
+                endPoint.y += 4;
                 Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y} {startingPoint.z} {endPoint.x} {endPoint.y} {endPoint.z} stone");
                 
             }
@@ -80,7 +81,13 @@ namespace Minecraft_Building_Generator.Structures
 
         public void Building_Rooftop(Coordinate startPoint)
         {
-            Generate_Commands.Add_Command($"fill {startPoint.x} {Height+6} {startPoint.z} {startPoint.x} {Height + 6} {startPoint.z} concrete 6");
+            //builds a pyramid top
+            Coordinate endPoint = new Coordinate(startPoint.x + Width, Height, startPoint.z + Width);
+            for(int i = 0; i < Width/2; i++)
+            {
+                Generate_Commands.Add_Command($"fill {startPoint.x+i} {Height+i} {startPoint.z+i} {endPoint.x-i} {Height+i} {endPoint.z-i} concrete 9");
+            }
+
             //throw new NotImplementedException();
         }
     }

@@ -8,12 +8,17 @@ using System.Threading.Tasks;
 namespace Minecraft_Building_Generator
 {
 
-    public enum gridsquare_legend { Initialized, Selected, Infrustructure, Building, Scenery, water };
-    public enum GridSquare_Zoning { Initialized, Selected, Infrustructure, Building, Scenery, Water, Road, None }
-    public enum BuildingClass { Residential, Commercial, Industrial, Other, None }
+    //public enum gridsquare_legend { Initialized, Selected, Infrustructure, Building, Scenery, water };
+    public enum GridSquare_Zoning { Initialized, Selected, Building, Infrustructure, Scenery, Water, None }
+    public enum BuildingClass { Residential, Commercial, Industrial, Utility, Service, None }
+    public enum InfrustructureClass { Road, Rail, Subway, bridge, None }
+    public enum SceneryClass { Park, Playground, Garden, Other, None }
+    public enum WaterClass { pond, lake, coast, waterfall}
     public enum BuildingMaterial { Glass, Wooden, Rock, Concrete, Jewel, Other, None }
 
-    
+    public enum Direction { North, East, South, West }
+
+
 
     public static class Shared_Constants
     {
@@ -33,7 +38,8 @@ namespace Minecraft_Building_Generator
 
         public const int MAX_NUMBER_OF_COMMANDS = 9950;
 
-        
+        public const int FLAT_WORLD_STARTING_Y = 3;
+
 
     }
 }

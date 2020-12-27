@@ -166,7 +166,7 @@ namespace Minecraft_Building_Generator
                     for (int k = 0; k < containerSize; k++)
                     {
                       
-                        Grid_Container aGridContainer = new Grid_Container(new Coordinate(_tempX, _tempY, _tempZ));
+                        Grid_Container aGridContainer = new Grid_Container(new Coordinate(_tempX, _tempY, _tempZ), (i,k));
 
                         aGridContainer.endCoordinate = new Coordinate
                             (
@@ -182,8 +182,8 @@ namespace Minecraft_Building_Generator
                             );
 
                         aGridContainer.isValid = true;
-                        
 
+                     
                         PrimaryGridMap[i, k] = aGridContainer;
                         _tempX = aGridContainer.startCoordinate.x + Shared_Constants.GRID_CONTAINER_SIZE; //adds one on to mark the start point of next grid   
                        
@@ -238,7 +238,7 @@ namespace Minecraft_Building_Generator
                     {
                         for(int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
                         {
-                            Grid_Square aSquare = new Grid_Square(new Coordinate(_tempX, _tempY, _tempZ));
+                            Grid_Square aSquare = new Grid_Square(new Coordinate(_tempX, _tempY, _tempZ), (i,k), (m,n));
 
                             aSquare.endCoordinate = new Coordinate
                                 (

@@ -451,7 +451,8 @@ namespace Minecraft_Building_Generator.Constants
            {
               'id': 35,
               'datavalue': 3,
-              'name': 'Light Blue Wool',
+              'name': 'Light 
+Wool',
               'type': 'wool'
            },
            {

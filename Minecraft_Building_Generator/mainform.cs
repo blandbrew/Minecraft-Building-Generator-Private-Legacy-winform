@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Minecraft_Building_Generator
 
         //UI_Grid_Planning_Container[,] GridPlanner_Map { get; set; } //handles UI grid layout
 
-                /*UI Panels*/
+        /*UI Panels*/
         UI_GridPanel gridcontainerPanel { get; set; }
         UI_GridPanel gridsquarePanel { get; set; }
 
@@ -30,7 +31,16 @@ namespace Minecraft_Building_Generator
         /*Important Variables that track states of the application for comparison*/
         private UI_Grid_Planning_Container selected_container { get; set; }
 
-        private GridSquare_Zoning selected_radioButton_gridzone { get; set; }
+        private UI_Grid_Planning_Square mouseDownSquare;
+        private UI_Grid_Planning_Square mouseUpSquare;
+        private Point selectionStart;
+        private Point selectionEnd;
+        private Rectangle selection;
+        private bool mouseDown;
+        private bool mouseClick;
+
+
+        private GridSquare_Zoning selected_radioButton_gridzone { get; set; } = GridSquare_Zoning.Building;
 
 
 
@@ -129,6 +139,9 @@ namespace Minecraft_Building_Generator
             label_export_complete.Text = "";
             label_export_complete.Refresh();
 
+
+            TransposeUI_to_Grid();
+
             Generate_Commands gc = new Generate_Commands();
             Build_Manager bm = new Build_Manager(aMap.PrimaryGridMap);
             bm.Process_Containers();
@@ -156,12 +169,27 @@ namespace Minecraft_Building_Generator
             {
                 UI_Map.Draw_UI_Grid_Squares(UI_Map.UI_Grid_Container[0,0].UI_Grid_Planning_Squares, gridsquarePanel);
             }
-            
+
         }
       
         private void panel_grid_square_planning_Paint(object sender, PaintEventArgs e)
         {
-            //empty because this is dependant on Container click events
+
+            if (mouseDown && Control.ModifierKeys == Keys.Shift)
+            {
+                using (Pen pen = new Pen(Color.Black, 1F))
+                {
+                    //DoubleBuffered = true;
+                    pen.DashStyle = DashStyle.Dash;
+                    gridsquarePanel.gridPanelGraphics.DrawRectangle(pen, selection);
+
+                }
+                //Refresh_Grid_SquareMap(gridsquarePanel);
+                UI_Map.Load_Grid_Squares(selected_container, gridsquarePanel);
+                //gridsquarePanel.gridPanelGraphics.Clear(Color.FromArgb(153, 180, 209));
+            }
+
+            
         }
 
 
@@ -191,11 +219,115 @@ namespace Minecraft_Building_Generator
         /// <param name="e"></param>
         private void panel_grid_square_planning_MouseClick(Object sender, MouseEventArgs e)
         {
+           // Console.WriteLine("MouseClicked");
+           if (!(Control.ModifierKeys == Keys.Shift))
+            {
+                UI_Map.Select_Rectangle_Square(sender, e.Location, selected_container, gridsquarePanel, selected_radioButton_gridzone);
+                mouseDown = false;
+            }
 
-           UI_Map.Select_Rectangle_Square(sender, e.Location, selected_container, gridsquarePanel, selected_radioButton_gridzone);
-            
+            //Bitmap bm = new Bitmap(gridsquarePanel.gridPanel.Width, gridsquarePanel.gridPanel.Height);
+            //gridsquarePanel.gridPanel.DrawToBitmap(bm, new Rectangle(0, 0, gridsquarePanel.gridPanel.Width, gridsquarePanel.gridPanel.Height));
+       
+            ////gridsquarePanel.gridPanel.BackgroundImage = bm;
+            //bm.Save(@"D:\gridbackground.bmp");
 
         }
+
+
+        private void panel_grid_square_planning_MouseDown(Object sender, MouseEventArgs e)
+        {
+
+            if (Control.ModifierKeys == Keys.Shift)
+            {
+                selectionStart = e.Location;
+
+                mouseDownSquare = UI_Map.MouseDownLocation(selectionStart, selected_container);
+                mouseDown = true;
+            }
+
+
+            
+
+
+
+        }
+        private void panel_grid_square_planning_MouseMove(Object sender, MouseEventArgs e)
+        {
+            
+            if (!mouseDown)
+            {
+                return;
+            }
+
+            //Console.WriteLine("MouseMove: " + e.Location);
+            selectionEnd = e.Location;
+            SetSelectionRect();
+
+            gridsquarePanel.gridPanel.Invalidate();
+            //Refresh_Grid_SquareMap(gridsquarePanel);
+            //Refresh();
+            //UI_Map.Load_Grid_Squares(selected_container, gridsquarePanel);
+            //UI_Map.Highlight_Rectangle_Squares(mouseDownSquare, mouseMovePoint, selected_container, gridsquarePanel, selected_radioButton_gridzone);
+
+        }
+
+        private void panel_grid_square_planning_MouseUp(Object sender, MouseEventArgs e)
+        {
+                mouseUpSquare = UI_Map.MouseDownLocation(selectionEnd, selected_container);
+            if (Control.ModifierKeys == Keys.Shift)
+            {
+                Console.WriteLine("Shft pressed");
+                mouseDown = false;
+                SetSelectionRect();
+                //gridsquarePanel.gridPanel.Refresh();
+
+
+                List<UI_Grid_Planning_Square> intersected = new List<UI_Grid_Planning_Square>();
+
+                foreach (UI_Grid_Planning_Square r in selected_container.UI_Grid_Planning_Squares)
+                {
+
+                    if (selection.IntersectsWith(r.rectangle))
+                    {
+
+                        Console.WriteLine(r.SquareCoordinate);
+                        intersected.Add(r);
+                    }
+
+                }
+
+                foreach (UI_Grid_Planning_Square square in intersected)
+                {
+                    UI_Map.Select_Rectangle_Square(square, gridsquarePanel, selected_radioButton_gridzone);
+                    //gridsquarePanel.Fill_Rectangle(selected_radioButton_gridzone, square.rectangle);
+                }
+               
+            }
+            
+        }
+
+            
+
+        
+
+        private void SetSelectionRect()
+        {
+            int x, y;
+            int width, height;
+
+            x = selectionStart.X > selectionEnd.X ? selectionEnd.X : selectionStart.X;
+            y = selectionStart.Y > selectionEnd.Y ? selectionEnd.Y : selectionStart.Y;
+
+            width = selectionStart.X > selectionEnd.X ? selectionStart.X - selectionEnd.X : selectionEnd.X - selectionStart.X;
+            height = selectionStart.Y > selectionEnd.Y ? selectionStart.Y - selectionEnd.Y : selectionEnd.Y - selectionStart.Y;
+
+            selection = new Rectangle(x, y, width, height);
+        }
+
+
+
+
 
 
 
@@ -213,6 +345,10 @@ namespace Minecraft_Building_Generator
             //clear out all contents of the UI GRID CONTAINERS and Associated square containers.   
         }
 
+        private void Refresh_Grid_SquareMap(UI_GridPanel squarePanel)
+        {
+            squarePanel.gridPanel.Refresh();
+        }
 
 
 
@@ -250,6 +386,35 @@ namespace Minecraft_Building_Generator
             }
         }
 
+
+        /// <summary>
+        /// Transposes UI Grid over to the Grid for processing
+        /// </summary>
+        private void TransposeUI_to_Grid()
+        {
+            //GridMap aMap 
+            //UI_GridMap UI_Map
+            // UI_Map;
+
+            Grid_Container[,] _gridContainers = aMap.PrimaryGridMap;
+            for (int i = 0; i < UI_Map.GridSize; i++)
+            {
+                for (int j = 0; j < UI_Map.GridSize; j++)
+                {
+                    Grid_Square[,] _gridSquares = _gridContainers[i, j].gridSquareMap;
+
+                    for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
+                    {
+                        for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
+                        {
+                            Console.WriteLine(UI_Map.UI_Grid_Container[i, j].UI_Grid_Planning_Squares[m, n].zone);
+                            aMap.PrimaryGridMap[i,j].gridSquareMap[m, n].zone = UI_Map.UI_Grid_Container[i, j].UI_Grid_Planning_Squares[m, n].zone;
+
+                        }
+                    }
+                }
+            }
+        }
 
 
     }

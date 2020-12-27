@@ -31,6 +31,7 @@ namespace Minecraft_Building_Generator.UI
 
         public UI_Grid_Planning_Container GetContainer((int, int) container_location)
         {
+            //application is working but throwing errors, need to test for validity without getting errors.  length maybe?
             if (UI_Grid_Container[container_location.Item1, container_location.Item2] != null)
                return UI_Grid_Container[container_location.Item1, container_location.Item2];
             else
@@ -211,6 +212,15 @@ namespace Minecraft_Building_Generator.UI
         }
 
 
+
+        /// <summary>
+        /// Executed when a square is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="click_location"></param>
+        /// <param name="_container"></param>
+        /// <param name="clickedPanel"></param>
+        /// <param name="selected_radioButton_gridzone"></param>
         public void Select_Rectangle_Square(Object sender, Point click_location, UI_Grid_Planning_Container _container, UI_GridPanel clickedPanel, GridSquare_Zoning selected_radioButton_gridzone)
         {
             //Console.WriteLine(""+_container.ContainerCoordinate.Item1+","+_container.ContainerCoordinate.Item2);
@@ -234,6 +244,127 @@ namespace Minecraft_Building_Generator.UI
             }
       
         }
+
+        public void Select_Rectangle_Square(UI_Grid_Planning_Square aSquare, UI_GridPanel clickedPanel, GridSquare_Zoning selected_radioButton_gridzone)
+        {
+            //Console.WriteLine(""+_container.ContainerCoordinate.Item1+","+_container.ContainerCoordinate.Item2);
+
+
+            //Console.WriteLine("" + square.SquareCoordinate.Item1 + "," + square.SquareCoordinate.Item2);
+            aSquare = Set_Selected_UI_Grid_Planning_Square(aSquare, clickedPanel, selected_radioButton_gridzone);
+
+            //setCointainer((_container.ContainerCoordinate.Item1, _container.ContainerCoordinate.Item2), _container);
+                    
+                
+
+          
+
+        }
+
+
+
+
+
+        //////////////////////////////////////DEVELOPMENT////////////////////////////////////////
+
+        public void Highlight_Rectangle_Squares(UI_Grid_Planning_Square mouseDownSquare, Point mouseMove_location, UI_Grid_Planning_Container _container, UI_GridPanel clickedPanel, GridSquare_Zoning selected_radioButton_gridzone)
+        {
+            HashSet<UI_Grid_Planning_Square> _highlighted = new HashSet<UI_Grid_Planning_Square>();
+            //Console.WriteLine(""+_container.ContainerCoordinate.Item1+","+_container.ContainerCoordinate.Item2);
+            UI_Grid_Planning_Square[,] _gridsquares = _container.UI_Grid_Planning_Squares;
+
+            for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
+            {
+                for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
+                {
+                    UI_Grid_Planning_Square mouseMoveSquare = _gridsquares[m, n];
+
+                    if (mouseMoveSquare.rectangle.Contains(mouseMove_location))
+                    {
+
+                        ClearMouseMove(_highlighted, clickedPanel);
+                        _highlighted = SetOfSquaresSelected(mouseDownSquare, mouseMoveSquare, _gridsquares, clickedPanel, selected_radioButton_gridzone);
+                        
+                        foreach(UI_Grid_Planning_Square square in _highlighted)
+                        {
+                            clickedPanel.Fill_Rectangle(selected_radioButton_gridzone, square.rectangle);
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        public HashSet<UI_Grid_Planning_Square> SetOfSquaresSelected(UI_Grid_Planning_Square mouseDownSquare, UI_Grid_Planning_Square mouseMoveSquare, UI_Grid_Planning_Square[,] _gridsquares, UI_GridPanel clickedPanel, GridSquare_Zoning selected_radioButton_gridzone)
+        {
+            int downX, downY, moveX, moveY, numRows, numColumns;
+            HashSet<UI_Grid_Planning_Square> set = new HashSet<UI_Grid_Planning_Square>();
+
+            downX = mouseDownSquare.SquareCoordinate.Item1;
+            downY = mouseDownSquare.SquareCoordinate.Item2;
+            moveX = mouseMoveSquare.SquareCoordinate.Item1;
+            moveY = mouseMoveSquare.SquareCoordinate.Item2;
+
+
+           numRows = moveX - downX;
+           numColumns = Math.Abs(downY - moveY);
+
+            for (int i = downX; i < numRows; i++)
+            {
+
+                for (int j = downY; j < numColumns; j++)
+                {
+                    set.Add(_gridsquares[i, j]);
+                    //clickedPanel.Fill_Rectangle(selected_radioButton_gridzone, _gridsquares[i, j].rectangle);
+                }
+            }
+
+            return set;
+        }
+
+        private void ClearMouseMove(HashSet<UI_Grid_Planning_Square> _highlighted, UI_GridPanel clickedPanel)
+        {
+            foreach (UI_Grid_Planning_Square square in _highlighted)
+            {
+                clickedPanel.Fill_Rectangle(GridSquare_Zoning.Initialized, square.rectangle);
+            }
+        }
+
+        private void PaintMouseMove()
+        {
+
+        }
+
+
+        /// <summary>
+        /// Returns the specific Grid square where mouseDown event occurred
+        /// </summary>
+        /// <param name="mouseDown_location"></param>
+        /// <param name="_container"></param>
+        /// <returns></returns>
+        public UI_Grid_Planning_Square MouseDownLocation(Point mouseDown_location, UI_Grid_Planning_Container _container)
+        {
+            UI_Grid_Planning_Square[,] _gridsquares = _container.UI_Grid_Planning_Squares;
+
+            for (int m = 0; m < Shared_Constants.GRID_SQUARE_SIZE; m++)
+            {
+                for (int n = 0; n < Shared_Constants.GRID_SQUARE_SIZE; n++)
+                {
+                    UI_Grid_Planning_Square square = _gridsquares[m, n];
+
+                    if (square.rectangle.Contains(mouseDown_location))
+                    {
+                        return square;
+                    }
+                }
+
+            }
+            return null;
+        }
+
+        //////////////////////////////////////DEVELOPMENT////////////////////////////////////////
+
 
 
 
@@ -283,6 +414,8 @@ namespace Minecraft_Building_Generator.UI
 
             gridSquarePanel.DrawAxis();
             gridSquarePanel.DrawAxisLabel();
+
+  
 
         }
         /*END OF Draw Methods*/
@@ -591,7 +724,6 @@ namespace Minecraft_Building_Generator.UI
 
         }
             
-
 
        }
 }

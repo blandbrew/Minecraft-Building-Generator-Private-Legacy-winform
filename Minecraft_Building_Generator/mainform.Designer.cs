@@ -571,6 +571,10 @@ namespace Minecraft_Building_Generator
             this.panel_grid_square_planning.TabIndex = 1;
             this.panel_grid_square_planning.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_grid_square_planning_Paint);
             this.panel_grid_square_planning.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseClick);
+            this.panel_grid_square_planning.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseDown);
+            this.panel_grid_square_planning.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseUp);
+            this.panel_grid_square_planning.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseMove);
+   
 
             // 
             // mainform

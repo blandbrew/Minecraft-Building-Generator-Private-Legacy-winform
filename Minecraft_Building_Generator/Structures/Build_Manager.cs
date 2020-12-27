@@ -4,6 +4,8 @@
 
 using Minecraft_Building_Generator.Command_Generator;
 using Minecraft_Building_Generator.Grid_Classes;
+using Minecraft_Building_Generator.Structures.Infrustructure;
+using Minecraft_Building_Generator.Structures.Scenary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,18 +50,57 @@ namespace Minecraft_Building_Generator.Structures
                         {
                             Grid_Square aSquare = squareMap[m, n];
 
-                            
-                            int randomHeight = rand.Next(20, 40);
-                            while (randomHeight % 4 != 0)//ensures that every building has a rooftop
+                            switch(aSquare.zone)
                             {
-                                randomHeight = rand.Next(20, 40);
+                                case GridSquare_Zoning.Building:
+                                    int randomHeight = rand.Next(20, 40);
+                                    while (randomHeight % 4 != 0)//ensures that every building has a rooftop
+                                    {
+                                        randomHeight = rand.Next(20, 40);
+                                    }
+
+                                    GenericBuilding gb = new GenericBuilding(randomHeight, BuildingClass.Commercial);
+
+                                    gb.Building_OutsideWalls(aSquare.startCoordinate);
+                                    gb.Building_Floor(aSquare.startCoordinate);
+                                    gb.Building_Rooftop(aSquare.startCoordinate);
+
+                                    break;
+                                case GridSquare_Zoning.Infrustructure:
+                                    Roads road = new Roads();
+                                    List<Grid_Square> squares = aSquare.GetAll_Adjacent_Squares();
+                                    foreach(Grid_Square _square in squares)
+                                    {
+                                        if(_square.zone == GridSquare_Zoning.Infrustructure)
+                                        {
+                                            //If X is greater or less than, direction is North South
+                                            if(_square.SquareArrayCoordinate.Item1 > aSquare.SquareArrayCoordinate.Item1 ||
+                                               _square.SquareArrayCoordinate.Item1 < aSquare.SquareArrayCoordinate.Item1)
+                                            {
+                                                road.Build_Road(aSquare.startCoordinate, Direction.South);
+                                            }
+                                            else if(_square.SquareArrayCoordinate.Item2 > aSquare.SquareArrayCoordinate.Item2 ||
+                                                    _square.SquareArrayCoordinate.Item2 < aSquare.SquareArrayCoordinate.Item2)
+                                            {
+                                                //If Y is greater or less than, direction is East west
+                                                road.Build_Road(aSquare.startCoordinate, Direction.East);
+                                            }
+                                        }
+                                    }
+                                    
+                                    break;
+
+                                case GridSquare_Zoning.Scenery:
+                                    Scenery grass = new Scenery();
+                                    grass.Build_Scenery(aSquare.startCoordinate);
+                                    break;
+
+                                case GridSquare_Zoning.Water:
+
+                                    break;
                             }
 
-                            GenericBuilding gb = new GenericBuilding(randomHeight, BuildingClass.Commercial);
 
-                            gb.Building_OutsideWalls(aSquare.startCoordinate);
-                            gb.Building_Floor(aSquare.startCoordinate);
-                            gb.Building_Rooftop(aSquare.centerblock);
 
                         }
                     }

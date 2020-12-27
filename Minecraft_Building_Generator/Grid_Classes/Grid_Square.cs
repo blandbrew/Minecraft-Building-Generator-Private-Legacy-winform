@@ -15,7 +15,12 @@ namespace Minecraft_Building_Generator.Grid_Classes
     {
         
 
-        //public GridSquare_Zoning zone { get; set; }
+        public GridSquare_Zoning zone { get; set; }
+
+        public (int, int) ParentContainerArrayCoordinate { get; private set; }
+        public (int, int) SquareArrayCoordinate { get; private set; }
+
+
         public UI_Grid_Planning_Container ui_rectangle { get; set; }
 
 
@@ -40,6 +45,19 @@ namespace Minecraft_Building_Generator.Grid_Classes
             adjacent_Squares = new List<Grid_Square>();
         }
 
+        /// <summary>
+        /// Create Grid squares and define array coordinates for the grid layout
+        /// </summary>
+        /// <param name="startPoint"></param>
+        /// <param name="parentContainerArrayCoordinate"></param>
+        /// <param name="squareArrayCoordinate"></param>
+        public Grid_Square(Coordinate startPoint, (int, int) parentContainerArrayCoordinate, (int,int) squareArrayCoordinate)
+        {
+            startCoordinate = startPoint;
+            adjacent_Squares = new List<Grid_Square>();
+            SquareArrayCoordinate = squareArrayCoordinate;
+            ParentContainerArrayCoordinate = parentContainerArrayCoordinate;
+        }
 
 
         /*Methods*/

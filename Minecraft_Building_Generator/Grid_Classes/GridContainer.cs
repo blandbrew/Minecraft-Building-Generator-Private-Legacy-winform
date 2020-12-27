@@ -21,6 +21,7 @@ namespace Minecraft_Building_Generator.Grid_Classes
 
         /*Variables*/
         public Grid_Square[,] gridSquareMap { get; set; }
+        public (int, int) ContainerArrayCoordinate { get; private set; }
         public List<Grid_Container> adjacent_Container_List { get; set; }
         
         public UI_Grid_Planning_Container[,] UI_GridPlanner { get; set; }
@@ -31,6 +32,13 @@ namespace Minecraft_Building_Generator.Grid_Classes
         {
             startCoordinate = startPoint;
             adjacent_Container_List = new List<Grid_Container>();
+        }
+
+        public Grid_Container(Coordinate startPoint, (int, int) ContainerArrayCoordinate)
+        {
+            startCoordinate = startPoint;
+            adjacent_Container_List = new List<Grid_Container>();
+            this.ContainerArrayCoordinate = ContainerArrayCoordinate;
         }
 
         /*Methods*/
