@@ -82,6 +82,7 @@ namespace Minecraft_Building_Generator.Structures
         public void Building_Rooftop(Coordinate startPoint)
         {
             //builds a pyramid top
+            //need to create properties definitions for various building structure types, frames, architecture
             Coordinate endPoint = new Coordinate(startPoint.x + Width, Height, startPoint.z + Width);
             for(int i = 0; i < Width/2; i++)
             {
