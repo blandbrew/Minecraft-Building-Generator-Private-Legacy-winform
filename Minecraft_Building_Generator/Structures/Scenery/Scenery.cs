@@ -23,11 +23,11 @@ namespace Minecraft_Building_Generator.Structures.Scenary
 
         }
 
-        public void Build_Scenery(Coordinate startingPoint)
+        public void Build_Scenery(Grid_Square square)
         {
-            Coordinate endPoint = new Coordinate(startingPoint.x + Shared_Constants.GRID_SQUARE_SIZE, startingPoint.y, startingPoint.z + Shared_Constants.GRID_SQUARE_SIZE);
+            //Coordinate endPoint = new Coordinate(startingPoint.x + 12, startingPoint.y, startingPoint.z + 12);
 
-            Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 13"); //13 is green concrete
+            Generate_Commands.Add_Command($"fill {square.startCoordinate.x} {square.startCoordinate.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {square.startCoordinate.z} {square.endCoordinate.x} {square.endCoordinate.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {square.endCoordinate.z} concrete 13"); //13 is green concrete
             
         }
     }

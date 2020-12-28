@@ -170,9 +170,9 @@ namespace Minecraft_Building_Generator
 
                         aGridContainer.endCoordinate = new Coordinate
                             (
-                                aGridContainer.startCoordinate.x + Shared_Constants.GRID_CONTAINER_SIZE,
+                                aGridContainer.startCoordinate.x + Shared_Constants.GRID_CONTAINER_SIZE-1,
                                 startPoint.y,
-                                aGridContainer.startCoordinate.z + Shared_Constants.GRID_CONTAINER_SIZE
+                                aGridContainer.startCoordinate.z + Shared_Constants.GRID_CONTAINER_SIZE-1
                             );
                         aGridContainer.centerblock = new Coordinate
                             (
@@ -242,9 +242,9 @@ namespace Minecraft_Building_Generator
 
                             aSquare.endCoordinate = new Coordinate
                                 (
-                                    aSquare.startCoordinate.x + Shared_Constants.GRID_SQUARE_SIZE,
+                                    aSquare.startCoordinate.x + Shared_Constants.GRID_SQUARE_SIZE-1,
                                     aSquare.startCoordinate.y,
-                                    aSquare.startCoordinate.z + Shared_Constants.GRID_SQUARE_SIZE
+                                    aSquare.startCoordinate.z + Shared_Constants.GRID_SQUARE_SIZE-1
                                 );
                             aSquare.centerblock = new Coordinate
                                 (

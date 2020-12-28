@@ -31,32 +31,30 @@ namespace Minecraft_Building_Generator.Structures
 
         }
 
-        public void Building_OutsideWalls(Coordinate startingPoint)
+        public void Building_OutsideWalls(Grid_Square square)
         {
 
             
-            Coordinate endPoint = new Coordinate(startingPoint.x + Width, startingPoint.y + Height, startingPoint.z + Width);
+            //Coordinate endPoint = new Coordinate(startingPoint.x + Width, startingPoint.y + Height, startingPoint.z + Width);
 
             //adds hollow command
-            Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y+Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y} {endPoint.z} glass 1 hollow");
+            Generate_Commands.Add_Command($"fill {square.startCoordinate.x} {square.startCoordinate.y+Shared_Constants.FLAT_WORLD_STARTING_Y} {square.startCoordinate.z} {square.endCoordinate.x} {square.endCoordinate.y} {square.endCoordinate.z} glass 1 hollow");
 
             //throw new NotImplementedException();
         }
 
-        public void Building_Floor(Coordinate startingPoint)
+        public void Building_Floor(Grid_Square square)
         {
             NumberOfFloors = Height / 4; //adds an additional floor onto the building height...may need to reconsider this
             for (int i = 0; i < NumberOfFloors; i++)
             {
 
-                Coordinate endPoint = new Coordinate(startingPoint.x + Width, startingPoint.y, startingPoint.z + Width );
-                startingPoint.y += 4;
-                endPoint.y += 4;
-                Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y} {startingPoint.z} {endPoint.x} {endPoint.y} {endPoint.z} stone");
+                //Coordinate endPoint = new Coordinate(startingPoint.x + Width, startingPoint.y, startingPoint.z + Width );
+                square.startCoordinate.y += 4;
+                square.endCoordinate.y += 4;
+                Generate_Commands.Add_Command($"fill {square.startCoordinate.x} {square.startCoordinate.y} {square.startCoordinate.z} {square.endCoordinate.x} {square.endCoordinate.y} {square.endCoordinate.z} stone");
                 
             }
-
-
         }
 
         public void Building_Lighting()
@@ -79,14 +77,15 @@ namespace Minecraft_Building_Generator.Structures
             throw new NotImplementedException();
         }
 
-        public void Building_Rooftop(Coordinate startPoint)
+        public void Building_Rooftop(Grid_Square square)
         {
             //builds a pyramid top
             //need to create properties definitions for various building structure types, frames, architecture
-            Coordinate endPoint = new Coordinate(startPoint.x + Width, Height, startPoint.z + Width);
+            //Coordinate endPoint = new Coordinate(startPoint.x + Width, Height, startPoint.z + Width);
+
             for(int i = 0; i < Width/2; i++)
             {
-                Generate_Commands.Add_Command($"fill {startPoint.x+i} {Height+i} {startPoint.z+i} {endPoint.x-i} {Height+i} {endPoint.z-i} concrete 9");
+                Generate_Commands.Add_Command($"fill {square.startCoordinate.x+i} {Height+i} {square.startCoordinate.z+i} {square.endCoordinate.x-i} {Height+i} {square.endCoordinate.z-i} concrete 9");
             }
 
             //throw new NotImplementedException();
