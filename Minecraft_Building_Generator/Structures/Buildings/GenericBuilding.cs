@@ -38,7 +38,7 @@ namespace Minecraft_Building_Generator.Structures
             //Coordinate endPoint = new Coordinate(startingPoint.x + Width, startingPoint.y + Height, startingPoint.z + Width);
 
             //adds hollow command
-            Generate_Commands.Add_Command($"fill {square.startCoordinate.x} {square.startCoordinate.y+Shared_Constants.FLAT_WORLD_STARTING_Y} {square.startCoordinate.z} {square.endCoordinate.x} {square.endCoordinate.y} {square.endCoordinate.z} glass 1 hollow");
+            Generate_Commands.Add_Command($"fill {square.startCoordinate.x} {square.startCoordinate.y+Shared_Constants.FLAT_WORLD_STARTING_Y} {square.startCoordinate.z} {square.endCoordinate.x} {square.endCoordinate.y + Height} {square.endCoordinate.z} glass 1 hollow");
 
             //throw new NotImplementedException();
         }

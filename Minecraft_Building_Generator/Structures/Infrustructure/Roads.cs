@@ -111,14 +111,14 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                 Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 15"); //black concrete
 
                 //draws the center yellow line
-                Generate_Commands.Add_Command($"fill {startingPoint.x + 6} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x - 7} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 4"); //yellow concrete
+                Generate_Commands.Add_Command($"fill {centerPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {centerPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 4"); //yellow concrete
 
                 //draws the two sidewalks
                 //west side
-                Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x-12} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x - 11} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
 
                 //East Side
-                Generate_Commands.Add_Command($"fill {startingPoint.x + 12} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
+                Generate_Commands.Add_Command($"fill {startingPoint.x + 11} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
                 return;
             }
 
@@ -130,14 +130,14 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 15"); //black concrete
 
                     //draws the center yellow line
-                    Generate_Commands.Add_Command($"fill {startingPoint.x + 6} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x - 7} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 4"); //yellow concrete
+                    Generate_Commands.Add_Command($"fill {centerPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {centerPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 4"); //yellow concrete
 
                     //draws the two sidewalks
                     //west side
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x-12} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x-11} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
                    
                     //East Side
-                    Generate_Commands.Add_Command($"fill {startingPoint.x + 12} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
+                    Generate_Commands.Add_Command($"fill {startingPoint.x + 11} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
 
                     return;
                 } else
@@ -146,14 +146,14 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 15"); //black concrete
 
                     //draws the center yellow line
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 6} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 7} concrete 4"); //yellow concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
 
                     //draws the two sidewalks
                     //north side
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 12} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 11} concrete 8"); //grey concrete
                     
                     //south side
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 12} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 11} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
                     return;
                 }
             }
@@ -166,14 +166,15 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 15"); //black concrete
 
                     //draws the center yellow line
-                    Generate_Commands.Add_Command($"fill {startingPoint.x + 6} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x - 7} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 4"); //yellow concrete
+                    Generate_Commands.Add_Command($"fill {centerPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {centerPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 4"); //yellow concrete
 
                     //draws the two sidewalks
                     //west side
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x-12} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x - 11} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
 
                     //East Side
-                    Generate_Commands.Add_Command($"fill {startingPoint.x + 12} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
+                    Generate_Commands.Add_Command($"fill {startingPoint.x + 11} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
+
                     return;
                 }
                 if(north && east)
@@ -199,19 +200,20 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 15"); //black concrete
 
                     //draws the center yellow line from north to center
-                    Generate_Commands.Add_Command($"fill {startingPoint.x + 6} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {centerPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
+                    Generate_Commands.Add_Command($"fill {centerPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {centerPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
                     
                     //yellow line center to east
-                    Generate_Commands.Add_Command($"fill {centerPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {centerPoint.x+7} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
+                    Generate_Commands.Add_Command($"fill {centerPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
+
 
                     //West side side walk
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x-12} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x-11} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
                     
                     //north east side square
-                    Generate_Commands.Add_Command($"fill {startingPoint.x + 12} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {startingPoint.x+13} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+1} concrete 8");
+                    Generate_Commands.Add_Command($"fill {startingPoint.x + 11} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+1} concrete 8");
 
                     //south east side walk
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+12} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+11} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
                     return;
                 }
                 if (north && west)
@@ -224,32 +226,32 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 15"); //black concrete
 
                     //draws the center yellow line
-                    Generate_Commands.Add_Command($"fill {startingPoint.x + 6} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {centerPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
+                    Generate_Commands.Add_Command($"fill {centerPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {centerPoint.x} {centerPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
                     //2 yellow center line bricks
-                    Generate_Commands.Add_Command($"fill {centerPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {centerPoint.x-7} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
+                    Generate_Commands.Add_Command($"fill {centerPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
 
                     //east side side walk
-                    Generate_Commands.Add_Command($"fill {startingPoint.x+12} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x+11} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
 
                     //north west side square
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {startingPoint.x + 1} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 1} concrete 8");
 
-                    //south east side walk
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 12} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                    //south side walk
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 11} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
                     return;
                 }
                 if (east && west)
                 {
-
+                    // ***
                     //fills entire square black
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 15"); //black concrete
 
                     //draws the center yellow line
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 6} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 7} concrete 4"); //yellow concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
 
                     //draws the two sidewalks
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 12} concrete 8"); //grey concrete
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 12} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 11} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 11} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
                     return;
                 }
                 if(south && west)
@@ -261,18 +263,18 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 15"); //black concrete
 
                     //draws the center yellow line
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+6} {centerPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {centerPoint.x} {centerPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
                     //draws right angle yellow line
-                    Generate_Commands.Add_Command($"fill {centerPoint.x} {centerPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {centerPoint.x} {centerPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z + 7} concrete 4"); //yellow concrete
+                    Generate_Commands.Add_Command($"fill {centerPoint.x} {centerPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {centerPoint.x} {centerPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 4"); //yellow concrete
 
                     // n/s east side side walk
-                    Generate_Commands.Add_Command($"fill {startingPoint.x + 12} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x + 11} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
 
                     // e/w north side square
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 12} concrete 8");
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 11} concrete 8");
 
                     //south west square
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+12} {endPoint.x-12} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+11} {startingPoint.x+1} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
                     return;
                 }
                 if(south && east)
@@ -285,19 +287,19 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 15"); //black concrete
 
                     //draws the center yellow line
-                    Generate_Commands.Add_Command($"fill {endPoint.x-7} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} {centerPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
+                    Generate_Commands.Add_Command($"fill {centerPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} {centerPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
                     //draws right angle yellow line
                     Generate_Commands.Add_Command($"fill {centerPoint.x} {centerPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
 
                     //west side side walk
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x-12} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x-11} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
                     //North Sidewalk
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z-12} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z-11} concrete 8"); //grey concrete
 
                     //southeast side square
-                    Generate_Commands.Add_Command($"fill {startingPoint.x+12} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+12} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
+                    Generate_Commands.Add_Command($"fill {startingPoint.x+11} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+11} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
 
-                                        return;
+                    return;
                 }
             }
 
@@ -317,13 +319,13 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                     Generate_Commands.Add_Command($"fill {centerPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {centerPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+1} concrete 4"); //grey concrete
 
                     //south Sidewalk
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+12} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+11} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
 
                     //north west side square
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {startingPoint.x + 1} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 1} concrete 8");
 
                     //north east side square
-                    Generate_Commands.Add_Command($"fill {startingPoint.x + 12} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 12} concrete 8");
+                    Generate_Commands.Add_Command($"fill {startingPoint.x + 11} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 11} concrete 8");
                     return;
                 }
                 if(north && east && south)
@@ -338,10 +340,10 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                     Generate_Commands.Add_Command($"fill {centerPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {centerPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 4"); //yellow concrete
 
                     //West side side walk
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x - 12} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x - 11} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
 
                     //north east side square
-                    Generate_Commands.Add_Command($"fill {startingPoint.x + 12} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 12} concrete 8");
+                    Generate_Commands.Add_Command($"fill {startingPoint.x + 11} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 11} concrete 8");
 
                     //2 yellow center line bricks
                     Generate_Commands.Add_Command($"fill {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {endPoint.x-1} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //grey concrete
@@ -362,10 +364,10 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //yellow concrete
 
                     //North Sidewalk
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z-12} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z-11} concrete 8"); //grey concrete
 
                     //south west side square
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+12} {endPoint.x-12} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+11} {endPoint.x-11} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
 
                     //2 yellow center line bricks
                     Generate_Commands.Add_Command($"fill {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {endPoint.x - 1} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //grey concrete
@@ -389,13 +391,13 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} {startingPoint.x+1} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {centerPoint.z} concrete 4"); //grey concrete
 
                     //East side side walk
-                    Generate_Commands.Add_Command($"fill {startingPoint.x+12} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
+                    Generate_Commands.Add_Command($"fill {startingPoint.x+11} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8"); //grey concrete
 
                     //north west side square
                     Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {startingPoint.x+1} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z+1} concrete 8");
 
                     //south west side square
-                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 12} {endPoint.x - 12} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
+                    Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 11} {endPoint.x - 11} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
                     return;
                 }
             }
@@ -420,13 +422,13 @@ namespace Minecraft_Building_Generator.Structures.Infrustructure
                 Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {startingPoint.x + 1} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 1} concrete 8");
 
                 //north east side square
-                Generate_Commands.Add_Command($"fill {startingPoint.x + 12} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 12} concrete 8");
+                Generate_Commands.Add_Command($"fill {startingPoint.x + 11} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z} {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 11} concrete 8");
 
                 //south east side square
                 Generate_Commands.Add_Command($"fill {endPoint.x} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} {endPoint.x - 1} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z - 1} concrete 8"); //grey concrete
 
                 //south west side square
-                Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 12} {endPoint.x - 12} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
+                Generate_Commands.Add_Command($"fill {startingPoint.x} {startingPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {startingPoint.z + 11} {endPoint.x - 11} {endPoint.y + Shared_Constants.FLAT_WORLD_STARTING_Y} {endPoint.z} concrete 8");
 
 
                 return;
