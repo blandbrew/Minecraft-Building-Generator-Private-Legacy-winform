@@ -73,11 +73,11 @@ namespace Minecraft_Building_Generator
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.minecraftCityGeneratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton_water = new System.Windows.Forms.RadioButton();
-            this.radioButton_scenery = new System.Windows.Forms.RadioButton();
-            this.radioButton_road = new System.Windows.Forms.RadioButton();
-            this.radioButton_building = new System.Windows.Forms.RadioButton();
             this.panel_grid_square_planning = new System.Windows.Forms.Panel();
+            this.radioButton_water = new System.Windows.Forms.RadioButton();
+            this.radioButton_road = new System.Windows.Forms.RadioButton();
+            this.radioButton_scenery = new System.Windows.Forms.RadioButton();
+            this.radioButton_building = new System.Windows.Forms.RadioButton();
             this.groupbox_coordinates.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_behaviorpack.SuspendLayout();
@@ -272,6 +272,7 @@ namespace Minecraft_Building_Generator
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(567, 131);
             this.tabControl1.TabIndex = 2;
+            this.tabControl1.Visible = false;
             // 
             // tab_behaviorpack
             // 
@@ -402,7 +403,6 @@ namespace Minecraft_Building_Generator
             this.panel_grid_planning.TabIndex = 0;
             this.panel_grid_planning.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_grid_planning_Paint);
             this.panel_grid_planning.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel_grid_planning_MouseClick);
-
             // 
             // dynamic_label_selected_container
             // 
@@ -509,6 +509,22 @@ namespace Minecraft_Building_Generator
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Grid Planning";
             // 
+            // panel_grid_square_planning
+            // 
+            this.panel_grid_square_planning.Controls.Add(this.radioButton_water);
+            this.panel_grid_square_planning.Controls.Add(this.radioButton_road);
+            this.panel_grid_square_planning.Controls.Add(this.radioButton_scenery);
+            this.panel_grid_square_planning.Controls.Add(this.radioButton_building);
+            this.panel_grid_square_planning.Location = new System.Drawing.Point(291, 28);
+            this.panel_grid_square_planning.Name = "panel_grid_square_planning";
+            this.panel_grid_square_planning.Size = new System.Drawing.Size(273, 335);
+            this.panel_grid_square_planning.TabIndex = 1;
+            this.panel_grid_square_planning.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_grid_square_planning_Paint);
+            this.panel_grid_square_planning.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseClick);
+            this.panel_grid_square_planning.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseDown);
+            this.panel_grid_square_planning.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseMove);
+            this.panel_grid_square_planning.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseUp);
+            // 
             // radioButton_water
             // 
             this.radioButton_water.AutoSize = true;
@@ -521,18 +537,6 @@ namespace Minecraft_Building_Generator
             this.radioButton_water.UseVisualStyleBackColor = true;
             this.radioButton_water.CheckedChanged += new System.EventHandler(this.AllRadioButtons_CheckedChanged);
             // 
-            // radioButton_scenery
-            // 
-            this.radioButton_scenery.AutoSize = true;
-            this.radioButton_scenery.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_scenery.Location = new System.Drawing.Point(11, 310);
-            this.radioButton_scenery.Name = "radioButton_scenery";
-            this.radioButton_scenery.Size = new System.Drawing.Size(102, 17);
-            this.radioButton_scenery.TabIndex = 5;
-            this.radioButton_scenery.Text = "Scenery (Green)";
-            this.radioButton_scenery.UseVisualStyleBackColor = true;
-            this.radioButton_scenery.CheckedChanged += new System.EventHandler(this.AllRadioButtons_CheckedChanged);
-            // 
             // radioButton_road
             // 
             this.radioButton_road.AutoSize = true;
@@ -544,6 +548,18 @@ namespace Minecraft_Building_Generator
             this.radioButton_road.Text = "Road (Black)";
             this.radioButton_road.UseVisualStyleBackColor = true;
             this.radioButton_road.CheckedChanged += new System.EventHandler(this.AllRadioButtons_CheckedChanged);
+            // 
+            // radioButton_scenery
+            // 
+            this.radioButton_scenery.AutoSize = true;
+            this.radioButton_scenery.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton_scenery.Location = new System.Drawing.Point(11, 310);
+            this.radioButton_scenery.Name = "radioButton_scenery";
+            this.radioButton_scenery.Size = new System.Drawing.Size(102, 17);
+            this.radioButton_scenery.TabIndex = 5;
+            this.radioButton_scenery.Text = "Scenery (Green)";
+            this.radioButton_scenery.UseVisualStyleBackColor = true;
+            this.radioButton_scenery.CheckedChanged += new System.EventHandler(this.AllRadioButtons_CheckedChanged);
             // 
             // radioButton_building
             // 
@@ -558,24 +574,6 @@ namespace Minecraft_Building_Generator
             this.radioButton_building.Text = "Building(Grey)";
             this.radioButton_building.UseVisualStyleBackColor = true;
             this.radioButton_building.CheckedChanged += new System.EventHandler(this.AllRadioButtons_CheckedChanged);
-            // 
-            // panel_grid_square_planning
-            // 
-            this.panel_grid_square_planning.Controls.Add(this.radioButton_water);
-            this.panel_grid_square_planning.Controls.Add(this.radioButton_road);
-            this.panel_grid_square_planning.Controls.Add(this.radioButton_scenery);
-            this.panel_grid_square_planning.Controls.Add(this.radioButton_building);
-            this.panel_grid_square_planning.Location = new System.Drawing.Point(291, 28);
-            this.panel_grid_square_planning.Name = "panel_grid_square_planning";
-            this.panel_grid_square_planning.Size = new System.Drawing.Size(273, 335);
-            this.panel_grid_square_planning.TabIndex = 1;
-            this.panel_grid_square_planning.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_grid_square_planning_Paint);
-            this.panel_grid_square_planning.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseClick);
-            this.panel_grid_square_planning.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseDown);
-            this.panel_grid_square_planning.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseUp);
-            this.panel_grid_square_planning.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_grid_square_planning_MouseMove);
-   
-
             // 
             // mainform
             // 
